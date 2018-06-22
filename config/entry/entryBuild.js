@@ -8,19 +8,19 @@ nodeCommon.deleteFile(entryBuildPath);
 fs.mkdirSync(entryBuildPath);
 
 const entryContent = (data) => {
-    return(
-        `import React from 'react';
+  let cont = `<Index />`;
+  return `
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Index from '../app/component/${data.path}';
-ReactDOM.render([<Index key="Index"/>],document.getElementById('app'));`
-    )
+ReactDOM.render(${cont},document.getElementById('app'));
+    `
 };
-
 /*生成webpack entry 入口文件*/
 entry.map((data) => {
-    fs.writeFile(entryBuildPath + '/' + data.name + '.js', entryContent(data), 'utf8', function (err) {
-        if (err) {
-            return console.log(err);
-        }
-    });
+  fs.writeFile(entryBuildPath + '/' + data.name + '.js', entryContent(data), 'utf8', function (err) {
+    if (err) {
+      return console.log(err);
+    }
+  });
 });

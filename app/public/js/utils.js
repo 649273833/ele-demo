@@ -23,4 +23,12 @@ let MyAnchor = (anchorName) =>{
         if(anchorElement) { anchorElement.scrollIntoView(); }
     }
 }
-export {urlParam,isMobile,MyAnchor}
+let pathname = (name,index) =>{
+    let pathname = window.location.href;
+    if(pathname.indexOf('#/' + name ) !== -1){
+        return 'active'
+    }else {
+        return null
+    }
+}
+export {urlParam,isMobile,MyAnchor,pathname}

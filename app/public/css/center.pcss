@@ -1,0 +1,69 @@
+.center{
+  .header{
+    width: 100%;
+    height: 44px;
+    background-image: linear-gradient(90deg,#0af,#0085ff);
+    a{
+      width: 44px;
+      height: 44px;
+      display: block;
+      float: left;
+      img{
+        vertical-align: middle;
+        display: block;
+        margin: 11px auto;
+        width: 20px;
+      }
+    }
+    p{
+      font-weight: 500;
+      font-size: 18px;
+      color: #fff;
+      text-align: center;
+      line-height: 44px;
+      margin-right: 44px;
+    }
+  }
+  .infoPane{
+    background-image: linear-gradient(90deg,#0af,#0085ff);
+    height: 110px;
+    >div{
+      float: left;
+    }
+    .userHeader{
+      width: 66px;
+      height: 66px;
+      margin: 22px 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .text{
+      height: 66px;
+      width: calc(100% - 122px);
+      color: #fff;
+      margin-top: 22px;
+      font-size: 20px;
+      font-weight: bold;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      line-height: 1.5;
+      a{
+        text-decoration: none;
+        :last-child{
+          font-weight: 400;
+          font-size: 12px;
+        }
+      }
+    }
+    .right{
+      display: block;
+      float: right;
+      vertical-align: middle;
+    }
+  }
+}
