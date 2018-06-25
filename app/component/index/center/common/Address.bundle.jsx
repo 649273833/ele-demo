@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import '../../../../../mock/userinfo'
 import CenterHeader from '../../common/CenterHeader'
 class Index extends React.Component{
   state = {
@@ -20,7 +21,6 @@ class Index extends React.Component{
   }
   render(){
     let {data} = this.state;
-    console.log(data)
     return(
       <div className='address'>
         <CenterHeader title='我的地址'/>
