@@ -1,7 +1,7 @@
 .center{
   .header{
     width: 100%;
-    height: 44px;
+    height: 11.733333vw;
     background-image: linear-gradient(90deg,#0af,#0085ff);
     a{
       width: 44px;
@@ -16,7 +16,7 @@
       }
     }
     p{
-      font-weight: 500;
+      font-weight: bold;
       font-size: 18px;
       color: #fff;
       text-align: center;
@@ -26,14 +26,15 @@
   }
   .infoPane{
     background-image: linear-gradient(90deg,#0af,#0085ff);
-    height: 110px;
+    //height: 110px;
+    padding: 5.666667vw 4vw;
     >div{
       float: left;
     }
     .userHeader{
-      width: 66px;
-      height: 66px;
-      margin: 22px 20px;
+      width: 60px;
+      height: 60px;
+      margin: 4px 20px 0 0;
       border-radius: 50%;
       overflow: hidden;
       img{
@@ -43,9 +44,8 @@
     }
     .text{
       height: 66px;
-      width: calc(100% - 122px);
+      width: calc(100% - 96px);
       color: #fff;
-      margin-top: 22px;
       font-size: 20px;
       font-weight: bold;
       text-overflow: ellipsis;
@@ -54,16 +54,89 @@
       line-height: 1.5;
       a{
         text-decoration: none;
+        color: #fff;
+        .title{
+          margin-top: 8px;
+          margin-bottom: 3px;
+        }
         :last-child{
-          font-weight: 400;
+          font-weight: 700;
           font-size: 12px;
+          vertical-align: top;
         }
       }
     }
     .right{
       display: block;
       float: right;
+      height: 3.6vw;
       vertical-align: middle;
+      margin: 28px 0 0 0;
+    }
+  }
+  .moneyPane{
+    .items {
+      float: left;
+      height: 90px;
+      width: 33.3%;
+      box-sizing: border-box;
+      border-right: 0.5px solid rgba(221, 221, 221, 0.5);
+      border-bottom: 0.5px solid rgba(221, 221, 221, 0.5);
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      line-height: 2;
+      font-weight:700;
+      :last-child{
+        border-right: none;
+      }
+      img{
+        display: block;
+        height: 6.933333vw;
+        margin: 26px auto 0;
+      }
+    }
+  }
+  .listPane{
+    background-color: #F5F5F5;
+    border-top: 10px solid transparent;
+    .items{
+      background-color: #fff;
+      &.mt{margin-top: 10px}
+      &.mb{margin-bottom: 10px}
+      height: 40px;
+      a{
+        >img,.title,.subtitle{
+          float: left;
+          width: 20px;
+          display: block;
+          margin: 10px;
+          color: #333;
+        }
+        .title,.subtitle{
+          width: calc(50% - 40px );
+          margin: 0;
+          line-height: 40px;
+        }
+        .subtitle{
+          font-size: 14px;
+          color: #ccc;
+          text-align: right;
+          .new{
+            color: #fff;
+            font-size: 12px;
+            font-weight: 300;
+            background-color: #ff0c0c;
+            padding: 2px 3px;
+            border-radius: 8px;
+            display: block;
+            margin: 10px 5px;
+            height: 14px;
+            float: left;
+            line-height: 14px;
+          }
+        }
+      }
     }
   }
 }

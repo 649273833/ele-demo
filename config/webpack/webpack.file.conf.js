@@ -9,8 +9,8 @@ function cleanFun(arr) {
 let copyObj = [
   /*{from: './app/public/plugin', to: './plugin'},
   {from: './app/public/versionTips', to: './versionTips'},
-  {from: './app/public/file', to: './resource'},
-  {from: './app/public/img/favicon.ico', to: './'},*/
+  {from: './app/public/file', to: './resource'},*/
+  {from: './app/public/img/favicon.ico', to: './'},
 ];
 
 let copyArr = [];
@@ -25,7 +25,7 @@ module.exports = {
   devDirectory: 'build', /*开发目录*/
   proDirectory: 'pc', /*发布目录*/
   resource: 'resource', /*静态资源*/
-  resourcePrefix: 'resource', /*线上静态资源前缀*/
+  resourcePrefix: '/resource', /*线上静态资源前缀*/
   cleanFun: cleanFun,
   copyArr: copyArr,
   copyObj: copyObj

@@ -1,9 +1,9 @@
 import React from 'react';
 import {HashRouter,Route,NavLink,Redirect} from 'react-router-dom';
-import Home from './home/home.bundle'
-import Find from './find/find.bundle'
-import Order from './order/order.bundle'
-import Center from './center/center.bundle'
+import Home from './home/Index.bundle'
+import Find from './find/Index.bundle'
+import Order from './order/Index.bundle'
+import Center from './center/Index.bundle'
 import {BundleFun} from './common/Bundle';
 
 class Index extends React.Component{
@@ -19,10 +19,10 @@ class Index extends React.Component{
               {/*<NavLink to='/Center'  activeClassName='selected'>Center</NavLink>*/}
             </div>
             <Route exact path='/' render={()=>(<Redirect to='/Home'/>)}/>
-            <Route path='/Home' component={()=>BundleFun(Home)}/>
-            <Route path='/Find' component={()=>BundleFun(Find)}/>
-            <Route path='/Order' component={()=>BundleFun(Order)}/>
-            <Route path='/Center' component={()=>BundleFun(Center)}/>
+            <Route path='/Home' component={() =>BundleFun(Home)}/>
+            <Route path='/Find' component={() =>BundleFun(Find)}/>
+            <Route path='/Order' component={() =>BundleFun(Order)}/>
+            <Route path='/Center' component={() =>BundleFun(Center)}/>
           </div>
         </HashRouter>
       </div>
