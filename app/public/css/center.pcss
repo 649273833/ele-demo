@@ -1,3 +1,5 @@
+
+*{margin: 0;padding: 0;}
 .center{
   .header{
     width: 100%;
@@ -95,6 +97,18 @@
         height: 6.933333vw;
         margin: 26px auto 0;
       }
+      p{
+        font-size: 12px;
+        margin-top: 24px;
+        .text{
+          font-weight: 700;
+          font-size: 26px;
+          line-height: 1;
+        }
+        &.wallte{color: rgb(0, 152, 251)}
+        &.redenv{color: rgb(255, 95, 62)}
+        &.gold{color: rgb(106, 194, 11)}
+      }
     }
   }
   .listPane{
@@ -136,6 +150,71 @@
             line-height: 14px;
           }
         }
+      }
+    }
+  }
+  .address{
+    .items{
+      height: 64px;
+      border-bottom: .266667vw solid #ddd;
+      padding: 0 15px;
+      .title{
+        float: left;
+        width: calc(100% - 44px);
+        p:first-child{
+          margin-top: 12px;
+          line-height: 1;
+        }
+        p{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          .name{
+            color: #333;
+            font-weight: 700;
+            font-size: 20px;
+          }
+          .gender,.phone{
+            padding: 0 1.6vw 0 .8vw;
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+          }
+        }
+        .address{
+          font-size: 12px;
+          color: #666;
+        }
+      }
+      .edit{
+        float: left;
+        width: 44px;
+        padding: 12px;
+        margin-top: 4px;
+        box-sizing: border-box;
+      }
+    }
+    .add{
+      position: fixed;
+      height: 13.866667vw;
+      bottom: 0;
+      width: 100%;
+      z-index: 5;
+      background: #fff;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-align-items: center;
+      align-items: center;
+      border-top: .266667vw solid #ddd;
+      color: #3190e8;
+      font-size: 16px;
+      img{
+        width: 5.333333vw;
+        height: 5.333333vw;
+        display: block;
+        margin-right: 1.6vw;
       }
     }
   }
