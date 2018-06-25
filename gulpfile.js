@@ -26,13 +26,13 @@ gulp.task('zip', () =>
 gulp.task('pc', function () {
   return gulp.src(webpackFile.proDirectory+'/**')
     .pipe(vsftp({
-      host: '118.24.165.123',
-      user: 'root',
-      pass: 'zzw262620',
-      cleanFiles: true,
-      port:11240,
-      remotePath: '/www/wwwroot/ele.zzwio.com/',
-    }));
+        host: '127.0.0.1',
+        user: 'root',
+        pass: '0000',
+        cleanFiles: true,
+        port:22,
+        remotePath: '/www/',
+     }))
 });
 
 
