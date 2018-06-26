@@ -26,10 +26,12 @@ class Index extends React.Component{
         .then(res=>{
           console.log(res.data.data);
           if(res.data.code > 0){
-            localStorage['isLogin']=res.data.code;
+            sessionStorage['isLogin']=res.data.code;
             sessionStorage['unickname'] = res.data.data.unickname;
             sessionStorage['uphone'] = res.data.data.uphone;
-            window.location.href='#/Center/CenterList'
+            sessionStorage['id'] = res.data.data.id;
+            sessionStorage['uheader'] = res.data.data.uheader;
+            window.location.href='#/Center'
           }
         })
         .catch(res=>{
@@ -51,6 +53,7 @@ class Index extends React.Component{
             value={uname}
             placeholder='手机/邮箱/用户名'
             onChange={this.handleUname}
+            onKeyPress={this.handleBtn}
           />
         </div>
         <div className='items'>
@@ -59,6 +62,7 @@ class Index extends React.Component{
             value={upwd}
             placeholder='密码'
             onChange={this.handleUpwd}
+            onKeyPress={this.handleBtn}
           />
         </div>
         <div className='btn'>
@@ -70,6 +74,7 @@ class Index extends React.Component{
             登录
           </button>
         </div>
+        <p className='aboutme'>关于我们</p>
       </div>
     )
   }

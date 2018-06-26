@@ -4,6 +4,7 @@ import Home from './home/Index.bundle'
 import Find from './find/Index.bundle'
 import Order from './order/Index.bundle'
 import Center from './center/Index.bundle'
+import AlertLogin from './common/AlertLogin'
 import {BundleFun} from './common/Bundle';
 
 class Index extends React.Component{
@@ -23,6 +24,7 @@ class Index extends React.Component{
             <Route path='/Find' component={() =>BundleFun(Find)}/>
             <Route path='/Order' component={() =>BundleFun(Order)}/>
             <Route path='/Center' component={() =>BundleFun(Center)}/>
+            <Route path='/AlertLogin' component={AlertLogin}/>
           </div>
         </HashRouter>
       </div>

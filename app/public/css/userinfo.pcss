@@ -1,0 +1,83 @@
+html,body{
+  height: 100vh;
+  width: 100vw;
+  background-color: #f5f5f5;
+}
+.userInfo{
+  .items{
+    padding: 0 15px;
+    background-color: #fff;
+    height: 48px;
+    line-height: 48px;
+    &.uheader{
+      height: 80px;
+      line-height: 80px;
+      border-bottom: 0.1px solid #f5f5f5;
+      position: relative;
+      .main-file-up{
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        opacity:0;
+        :focus{outline: none;}
+      }
+      .img{
+        width: 60px;
+        height: 60px;
+        margin: 10px 0 10px 10px;
+        float: right;
+        border-radius: 50%;
+        overflow: hidden;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .right{margin-top: 30px}
+    }
+    .right{
+      float: right;
+      width: 14px;
+      margin-top: 18px;
+      margin-left: 5px;
+    }
+    span{
+      float: right;
+      color: #666;
+    }
+    &.pwd{
+      span:first-child{float: none;}
+      a{
+        color: #0097ff;
+        text-decoration: none;
+      }
+    }
+    &.out{
+      padding: 0;
+      margin-top: 28px;
+      button{
+        background-color: #fff;
+        color: #ff5339;
+        font-size: 16px;
+        font-weight: 700;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+      }
+      button:focus{
+        outline: none;
+      }
+    }
+  }
+  .miniText{
+    color: #999;
+    font-size: 12px;
+    padding:10px 15px;
+  }
+}

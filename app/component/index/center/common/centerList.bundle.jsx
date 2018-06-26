@@ -12,15 +12,22 @@ class Index extends React.Component{
     wallte:'',
     redenv:'',
     gold:'',
+    uheader:''
   };
   componentDidMount(){
     sessionStorage['url'] = window.location.href;
-    let isLogin = localStorage['isLogin'];
-    if(isLogin > 0 ){
+    let isLogins = sessionStorage['isLogin'];
+    if(isLogins > 0 ){
       this.setState({isLogin:true});
       let unickname = sessionStorage['unickname'];
       let uphone = sessionStorage['uphone'];
-      this.setState({unickname,uphone});
+      let uheader = sessionStorage['uheader'];
+      if(unickname && uphone){
+        this.setState({unickname,uphone,uheader});
+      }else {
+        this.setState({isLogin:false});
+      }
+
       axios.get('./mock/userinfo/info.mock')
         .then(res=>{
           let wallte = res.data.data.data.wallte;
@@ -31,24 +38,24 @@ class Index extends React.Component{
     }
   }
   render(){
-    let {isLogin,unickname,uphone,wallte,redenv,gold} = this.state;
+    let {isLogin,unickname,uphone,wallte,redenv,gold,uheader} = this.state;
     return(
      <div>
        <CenterHeader url={1} title='我的'/>
        <div className='infoPane clear'>
          <div className='userHeader'>
-           <img src={require('../../../../public/img/userheader.png')} alt=""/>
+           <img src={require(isLogin && uheader ? uheader : '../../../../public/img/userheader.png')} alt=""/>
          </div>
          <div className='text'>
            {
              isLogin ?
-               <a href='javascript:;'>
+               <Link to='/Center/UserInfo'>
                  <p className='title'>{unickname}</p>
                  <p>
                    <img src={require('../../../../public/img/phone.png')} alt=""/>
                    {uphone}
                  </p>
-               </a>
+               </Link>
                :
                <Link to='/Center/LoginIndex'>
                  <p className='title'>登录/注册</p>

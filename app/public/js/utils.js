@@ -31,4 +31,6 @@ let pathname = (name,index) =>{
         return null
     }
 }
+
+
 export {urlParam,isMobile,MyAnchor,pathname}
