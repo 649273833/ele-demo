@@ -12,10 +12,16 @@ class Index extends React.Component{
     wallte:'',
     redenv:'',
     gold:'',
-    uheader:''
+    uheader:'',
+    isAndroid:false,
+    isiOS:false,
   };
   componentDidMount(){
     sessionStorage['url'] = window.location.href;
+    let u = navigator.userAgent;
+    let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    this.setState({isiOS,isAndroid})
     let isLogins = sessionStorage['isLogin'];
     if(isLogins > 0 ){
       this.setState({isLogin:true});
@@ -38,13 +44,18 @@ class Index extends React.Component{
     }
   }
   render(){
-    let {isLogin,unickname,uphone,wallte,redenv,gold,uheader} = this.state;
+    let {isLogin,unickname,uphone,wallte,redenv,gold,uheader,isiOS,isAndroid} = this.state;
     return(
      <div>
        <CenterHeader url={1} title='我的'/>
        <div className='infoPane clear'>
          <div className='userHeader'>
-           <img src={require(isLogin && uheader ? uheader : '../../../../public/img/userheader.png')} alt=""/>
+           {
+             isLogin && uheader ?
+               <img src={uheader} alt=""/>
+               :
+               <img src={require('../../../../public/img/userheader.png')} alt=""/>
+           }
          </div>
          <div className='text'>
            {
@@ -136,7 +147,17 @@ class Index extends React.Component{
            </a>
          </div>
          <div className='items mb clear'>
-           <a href='javascript:;'>
+           <a
+               href={
+                 isAndroid && !isiOS  ?
+                   'https://play.google.com/store/apps/details?id=me.ele'
+                   :
+                   !isAndroid && isiOS  ?
+                     'https://itunes.apple.com/app/e-le-me-wai-mai-ding-can-mei/id507161324'
+                     :
+                     'https://play.google.com/store/apps/details?id=me.ele'
+               }
+               className='clear'>
              <img src={require('../../../../public/img/ele-blue-z.png')} alt=""/>
              <span className='title'>下载饿了么APP</span>
              <span className='subtitle'>&nbsp;</span>

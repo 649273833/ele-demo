@@ -1,0 +1,72 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.order{
+  padding-bottom: 100px;
+  background-color: #f5f5f5;
+  .items{
+    height: 94px;
+    margin-top: 8px;
+    background-color: #fff;
+    padding: 15px 15px 0 15px;
+    display: flex;
+    flex-flow:row nowrap;
+
+    .order-img{
+      height: 40px;
+      width: 40px;
+      padding: 0 12px 8px 0;
+      box-sizing: border-box;
+    }
+    .order-info{
+      flex-grow:1;
+      .title{
+        border-bottom: 1px solid #dddddd5e;
+        .names{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: #333;
+          font-size: 14px;
+          text-decoration: none;
+          width: 180px;
+          display: inline-block;
+        }
+        .status{
+          font-size: 12px;
+          text-align: right;
+          color: #333;
+          max-width: 10em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          float: right;
+        }
+        .time{
+          font-size: 12px;
+          color: #999;
+          margin-bottom: 5px;
+        }
+      }
+      .subtitle{
+        font-size: 12px;
+        padding: 15px 0;
+        span{
+          display: inline-block;
+        }
+        .dishes{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: #666;
+          width: 180px;
+        }
+        .price{
+          float: right;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

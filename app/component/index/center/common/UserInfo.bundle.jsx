@@ -16,6 +16,7 @@ class Index extends React.Component{
     sessionStorage.removeItem('uphone')
     sessionStorage.removeItem('isLogin')
     sessionStorage.removeItem('id')
+    sessionStorage.removeItem('uheader')
     window.location.href='#/Center'
   }
   componentDidMount(){
@@ -36,86 +37,117 @@ class Index extends React.Component{
 
   fileUpChange = (e) => {
     var fileObj = e.target;
+    let id = this.state.id
     console.log(fileObj);
-    // var fileEnd = fileObj.value.substring(fileObj.value.indexOf("."));
     var fileEnd = fileObj.value.slice(fileObj.value.lastIndexOf('.'));
     console.log(fileEnd)
-    let fileTypeArr = ['.png','.jpg','.jpeg']
-    const isJPG =fileTypeArr.indexOf( fileEnd);
+    let fileTypeArr = ['.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG', '.SVG', '.svg']
+    const isJPG = fileTypeArr.indexOf(fileEnd);
     console.log(isJPG)
-    if(isJPG !== 0){
+    if (isJPG === -1) {
       console.log('只能选择jpg/png格式的图片！');
       alert('只能选择jpg/png格式的图片！');
       e.target.value = ''
       return
     }
-    const isLt2M = e.target.files[0].size / 1024 /1024 < 2;
-    console.log(e.target.files[0].size)
-    if(!isLt2M){
-      console.log('头像大小不能超过2M',Math.ceil(e.target.files[0].size / 1024) + ' kb');
-      alert('头像大小不能超过2M',Math.ceil(e.target.files[0].size / 1024) + ' kb');
+    const isLt2M = fileObj.files[0].size / 1024 / 1024 < 2;
+    console.log(fileObj.files[0].size)
+    if (!isLt2M) {
+      console.log('头像大小不能超过2M', Math.ceil(fileObj.files[0].size / 1024) + ' kb');
+      alert('头像大小不能超过2M', Math.ceil(fileObj.files[0].size / 1024) + ' kb');
       e.target.value = ''
       return
     }
     var windowURL = window.URL || window.webkitURL;
-    var dataURL;
-    var $img = document.getElementById("preview");
-
     if (fileObj && fileObj.files && fileObj.files[0]) {
-      dataURL = windowURL.createObjectURL(fileObj.files[0]);
-      console.log(dataURL)
+      var blob = windowURL.createObjectURL(fileObj.files[0]);
+      console.log('BLOB:',blob)
+      // $img.setAttribute('src', blob);//js写法
+      this.setState({ uheader: blob })
 
-      $img.setAttribute('src', dataURL);
-      this.getBase64(dataURL)
+      var reader = new FileReader();
+      reader.onload = function ( event ) {
+        var base64 = event.target.result;
+        axios.get('https://api.uu20.top/api/upheader.php',{
+          params:{
+            uheader:base64,
+            id:id
+          }
+        })
+          .then(res=>{
+            console.log(res.data)
+            if(res.data.code > 0){
+              console.log('上传成功！')
+              alert('上传成功！')
+              sessionStorage['uheader'] = base64;
+              // location.reload()
+            }else {
+              alert('上传失败，请重试！！')
 
-    } else {
-      dataURL = e.target.value;
-
-      var imgObj = document.getElementById("preview");
-      // 两个坑:
-      // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
-      // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
-      imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-      imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
-
+            }
+          })
+          .catch((res)=>{
+            console.log(res)
+            alert('网络错误，请稍后重试！')
+          })
+      };
     }
+    reader.readAsDataURL( fileObj.files[0] );
   }
 
   getBase64 = (imgUrl) => {
+    let id = this.state.id
+
     console.log(64)
+    console.log(id)
     window.URL = window.URL || window.webkitURL;
-    var xhr = new XMLHttpRequest();
-    xhr.open("get", imgUrl, true);
-    // 至关重要
-    xhr.responseType = "blob";
-    xhr.onload = function () {
-      if (this.status == 200) {
-        //得到一个blob对象
-        var blob = this.response;
-        console.log("blob", blob)
-        // 至关重要
-        let oFileReader = new FileReader();
-        oFileReader.onloadend = function (e) {
-          let base64 = e.target.result;
-          console.log("方式一》》》》》》》》》", base64)
-          axios.post('https://api.uu20.top/api/upheader',{
-            params:{
-              header:base64
-            }
-          })
-            .then(res=>{
-              if(res.data.code > 0){
-                console.log('上传成功！')
-                alert('上传成功！')
-                sessionStorage['uheader'] = base64;
+    try {
+      var xhr = new XMLHttpRequest();
+      xhr.open("get", imgUrl, true);
+      // 至关重要
+      xhr.responseType = "blob";
+      xhr.onload = function () {
+        if (this.status == 200) {
+          //得到一个blob对象
+          var blob = this.response;
+          // console.log("blob", blob)
+          // 至关重要
+          let oFileReader = new FileReader();
+          oFileReader.onloadend = function (e) {
+            let base64 = e.target.result;
+            axios.get('https://api.uu20.top/api/upheader.php',{
+              params:{
+                uheader:base64,
+                id:id
               }
             })
-        };
-        oFileReader.readAsDataURL(blob);
-        //====为了在页面显示图片，可以删除====
+              .then(res=>{
+                console.log(res.data)
+                if(res.data.code > 0){
+                  console.log('上传成功！')
+                  alert('上传成功！')
+                  sessionStorage['uheader'] = base64;
+                  // location.reload()
+                }else {
+                  alert('上传失败，请重试！！')
+
+                }
+              })
+              .catch((res)=>{
+                console.log(res)
+                alert('网络错误，请稍后重试！')
+              })
+          };
+          oFileReader.readAsDataURL(blob);
+          //====为了在页面显示图片，可以删除====
+        }
       }
+      xhr.send();
     }
-    xhr.send();
+    catch (e) {
+      alert('上传失败，刷新重试！')
+      window.location.reload()
+    }
   }
 
 
@@ -137,7 +169,12 @@ class Index extends React.Component{
           />
           <img className='right' src={require('../../../../public/img/Arrow-right-gray.png')} alt=""/>
           <div className='img'>
-            <img id="preview" src={require(isLogin && uheader ? uheader : '../../../../public/img/userheader.png')} alt=""/>
+            {
+              isLogin && uheader ?
+                <img src={uheader} alt=""/>
+                :
+                <img src={require('../../../../public/img/userheader.png')} alt=""/>
+            }
           </div>
         </div>
         <div className='items'>

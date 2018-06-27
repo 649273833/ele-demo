@@ -2,6 +2,7 @@ import React from 'react';
 import {Provider,connect} from 'react-redux';
 import axios from 'axios';
 import store from '../common/store';
+import { isMobile } from '../../../public/js/utils';
 
 class Index extends React.Component{
   state = {
@@ -24,7 +25,6 @@ class Index extends React.Component{
         }
       })
         .then(res=>{
-          console.log(res.data.data);
           if(res.data.code > 0){
             sessionStorage['isLogin']=res.data.code;
             sessionStorage['unickname'] = res.data.data.unickname;
@@ -53,8 +53,9 @@ class Index extends React.Component{
             value={uname}
             placeholder='手机/邮箱/用户名'
             onChange={this.handleUname}
-            onKeyPress={this.handleBtn}
+
           />
+          <span className='errAlert'></span>
         </div>
         <div className='items'>
           <input
@@ -62,7 +63,7 @@ class Index extends React.Component{
             value={upwd}
             placeholder='密码'
             onChange={this.handleUpwd}
-            onKeyPress={this.handleBtn}
+
           />
         </div>
         <div className='btn'>

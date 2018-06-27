@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../../../../mock/userinfo'
 import {Link} from 'react-router-dom';
 import Modal from '../../common/Modal'
+import Loaderr from '../../common/Loaderr'
 import CenterHeader from '../../common/CenterHeader'
 class Index extends React.Component{
   state = {
@@ -27,7 +28,7 @@ class Index extends React.Component{
     return(
       <div className='address'>
         <CenterHeader title='我的地址'/>
-        <div>
+        <div style={{paddingBottom:100}}>
           {
             (data && isLogin) ? data.map((data)=>
               <div key={data.id} className='items clear'>
@@ -46,12 +47,7 @@ class Index extends React.Component{
                 <img className='edit' src={require('../../../../public/img/edit-gray.png')} alt=""/>
               </div>
             ): (
-              !data && isLogin ?
-                <div>
-                  加载失败！<br/>
-                  <a href="">刷新一下</a>
-                </div>
-                : <Modal/>
+              !data && isLogin ? <Loaderr/> : <Modal/>
             )
           }
         </div>
