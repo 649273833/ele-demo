@@ -1,11 +1,10 @@
 import React from 'react';
-import CenterHeader from '../../common/CenterHeader';
 import Footer from '../../common/Footer';
 import '../../../../public/css/order.pcss'
 import axios from 'axios/index';
 import '../../../../../mock/userinfo'
-import Modal from '../../common/Modal'
-import Loaderr from '../../common/Loaderr'
+import {Modal,Loaderr,CenterHeader} from '../../common/Modal'
+
 class Index extends React.Component{
   state = {
     data:'',
@@ -49,9 +48,8 @@ class Index extends React.Component{
                 </div>
               </div>
             </div>
-          ): (
+          ):
             !data && isLogin ? <Loaderr/> : <Modal/>
-          )
         }
         <Footer/>
       </div>

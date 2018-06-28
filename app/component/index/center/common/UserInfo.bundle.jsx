@@ -2,7 +2,9 @@ import React from 'react';
 import CenterHeader from '../../common/CenterHeader';
 import axios from 'axios'
 import '../../../../public/css/userinfo.pcss'
-import Modal from '../../common/Modal'
+import {Modal} from '../../common/Modal'
+let qs = require('qs');
+
 class Index extends React.Component{
   state = {
     unickname:'',
@@ -68,12 +70,14 @@ class Index extends React.Component{
       var reader = new FileReader();
       reader.onload = function ( event ) {
         var base64 = event.target.result;
-        axios.get('https://api.uu20.top/api/upheader.php',{
-          params:{
-            uheader:base64,
-            id:id
-          }
+        let instance = axios.create({
+          headers:{'content-type': 'application/x-www-form-urlencoded'}
         })
+        let data = qs.stringify({
+          'uheader':base64,
+          'id':id
+        })
+        instance.post('https://api.uu20.top/api/upheader.php',data)
           .then(res=>{
             console.log(res.data)
             if(res.data.code > 0){

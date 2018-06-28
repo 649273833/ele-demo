@@ -2,13 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import '../../../../../mock/userinfo'
 import {Link} from 'react-router-dom';
-import Modal from '../../common/Modal'
-import Loaderr from '../../common/Loaderr'
-import CenterHeader from '../../common/CenterHeader'
+import {Modal,Loaderr,CenterHeader} from '../../common/Modal'
 class Index extends React.Component{
   state = {
     data:'',
     isLogin:false,
+    loaderr:false,
   }
   componentDidMount(){
     let isLogins = sessionStorage['isLogin'];
@@ -17,14 +16,22 @@ class Index extends React.Component{
       axios.get('./mock/userinfo/info.mock')
         .then(res=>{
           let data = res.data.data.address;
-          this.setState({data})
+          if(res.data.code > 0){
+            this.setState({data})
+          }else {
+            this.setState({loaderr:true})
+          }
+        })
+        .catch(()=>{
+          this.setState({loaderr:true})
+          console.log(2222)
         })
     }else {
 
     }
   }
   render(){
-    let {data,isLogin} = this.state;
+    let {data,isLogin,loaderr} = this.state;
     return(
       <div className='address'>
         <CenterHeader title='我的地址'/>
@@ -47,7 +54,7 @@ class Index extends React.Component{
                 <img className='edit' src={require('../../../../public/img/edit-gray.png')} alt=""/>
               </div>
             ): (
-              !data && isLogin ? <Loaderr/> : <Modal/>
+              loaderr && isLogin ? <Loaderr/> : !isLogin ? <Modal/> : !data ? <div style={{textAlign:'center',paddingTop:100}}>没有数据</div> : ''
             )
           }
         </div>

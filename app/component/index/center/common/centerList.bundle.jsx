@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import '../../../../../mock/userinfo'
 import Footer from '../../common/Footer'
-import CenterHeader from '../../common/CenterHeader'
+import {CenterHeader} from '../../common/Modal'
 class Index extends React.Component{
   state = {
     isLogin:false,

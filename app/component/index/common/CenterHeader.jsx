@@ -1,5 +1,5 @@
 import React from 'react';
-class Index extends React.Component{
+class CenterHeader extends React.Component{
   state = {
     url : ''
   };
@@ -28,4 +28,4 @@ class Index extends React.Component{
     )
   }
 }
-export default Index
+export default CenterHeader
