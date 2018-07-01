@@ -92,7 +92,7 @@ let config = merge(baseWebpackConfig, {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|ttf|eot|woff|woff2|svg|swf)$/,
+        test: /\.(png|jpg|gif|ttf|eot|woff|woff2|svg|swf|jpeg|PNG|JPG|JPEG|GIF)$/,
         loader: 'file-loader?name=[name].[ext]&outputPath=' + webpackFile.resource + '/'
       }
     ]

@@ -7,6 +7,7 @@ import { getLocation, showPosition } from '../../common/action';
 import store from '../../common/store'
 import {Provider,connect} from 'react-redux';
 import Swipes from './Swipes';
+import Banner from './banner'
 class Index extends React.Component{
   state = {
     locations :''
@@ -39,9 +40,9 @@ class Index extends React.Component{
           </span>
           </div>
         </div>
-        {!locations ? <LoactionErr/> :
-          <Swipes/>
-        }
+        {!locations ? <LoactionErr/> : ''}
+        <Swipes/>
+        <Banner/>
         <Footer/>
       </div>
     )
