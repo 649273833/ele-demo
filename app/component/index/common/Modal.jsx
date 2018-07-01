@@ -12,6 +12,13 @@ const Modal = () =>
       <Link to='/Center/LoginIndex'>去登录</Link>
     </div>
   </div>
+const AlertLogin = () =>
+  <div className='loaderr'>
+    <img src={require('../../../public/img/70008646170d1f654e926a2aaa3afpng.png')} alt=""/>
+    <p>登录后查看外卖订单</p><br/>
+    <Link to='/Center/LoginIndex'>立即登录</Link>
+  </div>
+
 const Loaderr = () =>
   <div className='loaderr'>
     <img src={require('../../../public/img/70008646170d1f654e926a2aaa3afpng.png')} alt=""/>
@@ -53,8 +60,6 @@ class CenterHeader extends React.Component{
   };
   componentDidMount (){
     this.setUrl();
-
-
   }
   render(){
     let urlstatus = this.props.url;
@@ -68,4 +73,4 @@ class CenterHeader extends React.Component{
     )
   }
 }
-export  {Modal,LoadingText,Loaderr,CenterHeader};
+export  {Modal,LoadingText,Loaderr,CenterHeader,AlertLogin};

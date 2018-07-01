@@ -10,6 +10,9 @@ class Index extends React.Component{
     loaderr:false,
   }
   componentDidMount(){
+    this.handleBaseInfo()
+  }
+  handleBaseInfo = () =>{
     let isLogins = sessionStorage['isLogin'];
     if(isLogins){
       this.setState({isLogin:true})
@@ -24,10 +27,7 @@ class Index extends React.Component{
         })
         .catch(()=>{
           this.setState({loaderr:true})
-          console.log(2222)
         })
-    }else {
-
     }
   }
   render(){

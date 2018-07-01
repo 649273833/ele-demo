@@ -1,8 +1,7 @@
 import React from 'react';
-import CenterHeader from '../../common/CenterHeader';
 import axios from 'axios'
 import '../../../../public/css/userinfo.pcss'
-import {Modal} from '../../common/Modal'
+import {Modal,CenterHeader} from '../../common/Modal'
 let qs = require('qs');
 
 class Index extends React.Component{

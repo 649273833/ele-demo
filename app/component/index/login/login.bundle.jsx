@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider,connect} from 'react-redux';
 import axios from 'axios';
 import store from '../common/store';
-import { isMobile } from '../../../public/js/utils';
+
 
 class Index extends React.Component{
   state = {

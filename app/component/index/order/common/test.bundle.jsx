@@ -1,11 +1,10 @@
 import ReactPullLoad,{ STATS } from 'react-pullload'
 import React from 'react'
-import CenterHeader from '../../common/CenterHeader';
 import Footer from '../../common/Footer';
 import '../../../../public/css/order.pcss'
 import axios from 'axios/index';
 import '../../../../../mock/userinfo'
-import {Modal,LoadingText,Loaderr} from '../../common/Modal'
+import {AlertLogin,LoadingText,Loaderr,CenterHeader} from '../../common/Modal'
 
 class App extends React.Component{
   constructor(){
@@ -21,6 +20,9 @@ class App extends React.Component{
     }
   }
   componentDidMount(){
+    this.handleBaseInfo()
+  }
+  handleBaseInfo = () =>{
     let isLogins = sessionStorage['isLogin'];
     if(isLogins){
       this.setState({isLogin:true})
@@ -38,7 +40,6 @@ class App extends React.Component{
         })
     }
   }
-
   handleAction = (action) => {
     // console.info('传入action：',action);
     // console.info('当前state action：',this.state.action);
@@ -190,7 +191,7 @@ class App extends React.Component{
                       </div>
                     </div>
                 ): (
-                  loaderr && isLogin ? <Loaderr/> : (!isLogin ? <Modal/> : (!data ? <div style={{textAlign:'center',paddingTop:100}}>没有数据</div> : ''))
+                  loaderr && isLogin ? <Loaderr/> : (!isLogin ? <AlertLogin/> : (!data ? <div style={{textAlign:'center',paddingTop:100}}>没有数据</div> : ''))
                 )
               }
               {
