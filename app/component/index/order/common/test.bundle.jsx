@@ -157,7 +157,7 @@ class App extends React.Component{
           action={this.state.action}
           handleAction={this.handleAction}
           hasMore={hasMore}
-          distanceBottom={1000}>
+          distanceBottom={100}>
           <ul className="test-ul">
             {/*<button onClick={this.handRefreshing}>refreshing</button>*/}
             {/*<button onClick={this.handLoadMore}>loading more</button>*/}

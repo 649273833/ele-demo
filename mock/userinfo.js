@@ -10,7 +10,7 @@ Mock.mock(/\/todoList.mock/,{
         }]
     },
     'message':'操作成功！',
-    'systemData':new Date().getTime()
+    'systemDate':new Date().getTime()
 });
 Mock.mock(/\/info.mock/,{
   'code':1,
@@ -32,7 +32,7 @@ Mock.mock(/\/info.mock/,{
     }]
   },
   'message':'操作成功！',
-  'systemData':new Date().getTime()
+  'systemDate':new Date().getTime()
 })
 Mock.mock(/\/order.mock/,{
   'code':1,
@@ -48,5 +48,5 @@ Mock.mock(/\/order.mock/,{
 }]
   },
   'message':'获取成功！',
-  'systemData':new Date().getTime()
+  'systemDate':new Date().getTime()
 })

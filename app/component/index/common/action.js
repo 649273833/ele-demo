@@ -74,11 +74,12 @@ let showError = (error) =>(dispatch)=>{
 
 
 let SearchLocation = (latlon) => (dispatch)=>{
-  jsonp('http://api.map.baidu.com/geocoder/v2/?ak=adyHtftfE9CuhY3pqKf7EvcL1S21ZGkQ&callback=renderReverse&location='+latlon+'&output=json&pois=1')
+  jsonp('http://api.map.baidu.com/geocoder/v2/?ak=adyHtftfE9CuhY3pqKf7EvcL1S21ZGkQ&callback=renderReverse&location='+latlon+'&output=json&pois=5')
     .then(res=>res.json())
     .then(res=>{
       if(res.status === 0){
-        let data = res.result.pois
+        let data = res.result.pois;
+        console.log(data)
         dispatch({type:'setLocationList',locationList:data})
       }else if(res.status === 1){
         dispatch({type:'setLocationList',locationList:'没有相关的搜索结果'})

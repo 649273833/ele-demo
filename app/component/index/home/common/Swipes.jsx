@@ -1,19 +1,64 @@
 import React from "react";
-
+const MIN_TOUCH_DISTENCE = 150
 class Page extends React.Component {
   state = {
-
+    active:true,
+    width:375,
+    parentWidth:'',
+    move:0
   }
   componentDidMount () {
+    let parentWidth = this.state.width
+    this.setState({parentWidth})
+    // 初始化父元素的宽度为1倍屏幕宽度
+  }
 
+  handleStart = (e)=>{
+    this.startX = e.touches[0].clientX;
+    let parentWidth = this.state.width * 2
+    this.setState({parentWidth})
+    // 滑动的时候变成2倍屏幕宽度
+  }
+  handleMove = (e) => {
+    this.endX = e.touches[0].clientX;
+    this.setState({move:this.endX - this.startX})
+    // 滑动的时候设置transform的translateX，值为 当前位置的X轴位置 减去初始滑动位置的X轴位置
+  }
+  handleEnd = (e) =>{
+    let distance = Math.abs(this.startX - this.endX);
+    this.setState({move:0})//滑动结束后，将translateX的值初始为0，复位。不管滑动距离是否超过最小值，都会初始化到0的状态
+    if (distance > MIN_TOUCH_DISTENCE) {
+      // 不能再这里初始化位移距离，因为滑动距离不够最小距离的话，就无法复位了
+      if (this.startX > this.endX) {
+
+        this.setState({active:!this.state.active})//设置active的bolo类型为反，通过active的类似可以更新滑动元素的class实现display：none效果
+      } else {
+        this.setState({active:!this.state.active})
+      }
+    }
+    let parentWidth = this.state.width
+    this.setState({parentWidth})
   }
   render() {
+    let {active,width,parentWidth,move} = this.state;
+    let moves = {
+      width:width,
+      transition:'all .4s',
+      transform : `translateX(${move}px)`
+    }
     return (
       <section>
         <div className="swipeers">
-          <div className='flipsnap clear'>
+          <div
+            className='flipsnap clear'
+            style={{width:parentWidth}}
+          >
             <div
-              className="card-slide"
+              className={active ? 'card-slide active' : 'card-slide'}
+              style={moves}
+              onTouchStart={this.handleStart}
+              onTouchEnd={this.handleEnd}
+              onTouchMove={this.handleMove}
             >
               <div className="item" >
                 <img src={require('../../../../public/img/a867c870b22bc74c87c348b75528d.png')} alt=""/>
@@ -56,17 +101,23 @@ class Page extends React.Component {
                 <p>披萨意面</p>
               </div>
             </div>
-            <div className="card-slide" >
+            <div
+              className={!active ? 'card-slide active' : 'card-slide'}
+              style={moves}
+              onTouchStart={this.handleStart}
+              onTouchEnd={this.handleEnd}
+              onTouchMove={this.handleMove}
+            >
               <div className="item" >
                 <img src={require('../../../../public/img/6f2631288a44ec177204e05cbcb93jpeg.png')} alt=""/>
                 <p>美食</p>
               </div>
             </div>
+
           </div>
         </div>
         <div className='pre-next'>
-          <span></span>
-          <span></span>
+          <span className={active ? 'active' : ''}/><span className={active ? '' : 'active'}/>
         </div>
       </section>
     );

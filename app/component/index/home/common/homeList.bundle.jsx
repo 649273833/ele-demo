@@ -7,7 +7,8 @@ import { getLocation, showPosition } from '../../common/action';
 import store from '../../common/store'
 import {Provider,connect} from 'react-redux';
 import Swipes from './Swipes';
-import Banner from './banner'
+import Banner from './banner';
+import FoodList from './FoodList'
 class Index extends React.Component{
   state = {
     locations :''
@@ -34,15 +35,16 @@ class Index extends React.Component{
             <i className='right'/>
           </div>
           <div className='search'>
-          <span>
+          <Link to='/Home/SearchFood'>
             <img src={require('../../../../public/img/search-gray.png')} alt=""/>
             搜索饿了么商家、商品名称
-          </span>
+          </Link>
           </div>
         </div>
-        {!locations ? <LoactionErr/> : ''}
+        {locations ? '' : location ? '' : <LoactionErr/> }
         <Swipes/>
         <Banner/>
+        <FoodList/>
         <Footer/>
       </div>
     )

@@ -20,7 +20,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 250px;
+            max-width: 250px;
           }
           img{
             vertical-align: text-bottom;
@@ -44,7 +44,9 @@
           text-align: center;
           font-size: 14px;
           line-height: 38px;
-          span{
+          a{
+            text-decoration: none;
+            color: #999;
             img{
               vertical-align: text-bottom;
               width: 20px;
@@ -54,15 +56,18 @@
       }
     .swipeers{
       width: 100%;
-      overflow-x: auto;
+      overflow-x: hidden;
       .flipsnap{
-        width: 750px;
+        width: 100%;
         .card-slide{
-          width: 375px;
-          display: grid;
+          width: 100%;
+          display: none;
           float: left;
           grid-template-columns: 1fr  1fr 1fr 1fr 1fr;
           grid-template-rows: 70px 70px;
+          &.active{
+            display: grid;
+          }
           div.item{
             text-align: center;
             color: #666;
@@ -77,7 +82,6 @@
       }
     }
     .pre-next{
-      display: none;
       height: 20px;
       margin: 5px auto;
       text-align: center;
@@ -120,6 +124,199 @@
           float: right;
           position: relative;
           bottom: 12px;
+        }
+      }
+    }
+    .food-list{
+      .recommended{
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 15px;
+        :after,:before{
+          display: inline-block;
+          content: '';
+          width: 24px;
+          height: 1.5px;
+          background-color: #999;
+          margin-left: 10px;
+          margin-bottom: 5px;
+        }
+        :before{
+          margin-right: 10px;
+        }
+      }
+      .list-items{
+        padding: 10px 0;
+        display: grid;
+        grid-template-rows: 65px 1fr;
+        grid-template-columns: 65px 1fr;
+        .food-img{
+          grid-row: 1/3;
+          img{
+            width: 100%;
+            padding: 0 10px;
+          }
+        }
+        .activity-wrap{
+          padding: 10px;
+          .source-tag{
+            font-size: 12px;
+            color: rgb(232, 71, 11);
+            line-height: 14px;
+            display: flex;
+            height: 14px;
+            img{
+              width: 12px;
+              padding: 1px;
+              box-sizing: border-box;
+            }
+          }
+        }
+        .act-row{
+          display: flex;
+          height: 14px;
+          line-height: 14px;
+          justify-content: space-between;
+          font-size: 12px;
+          color: #999;
+          margin-top: 4px;
+          .act-row-info{
+            i{
+              background-color: rgb(112, 188, 70);
+              font-style: normal;
+              font-size: 12px;
+              padding: 0 2px;
+              border-radius: 1px;
+              transform: scale(.9);
+              display: inline-block;
+              color: #fff;
+              line-height: 15px;
+              margin-right: 3px;
+            }
+          }
+          .act-row-num{
+            i{
+              border: 4px solid transparent;
+              border-top-color: #999;
+              display: inline-block;
+              margin-left: 2px;
+            }
+          }
+        }
+        .act-more{
+          height: auto;
+          font-size: 12px;
+          color: #999;
+          margin-top: 4px;
+          .act-more-info{
+            i{
+              background-color: rgb(240, 115, 115);
+              font-style: normal;
+              font-size: 12px;
+              padding: 0 2px;
+              border-radius: 1px;
+              transform: scale(.9);
+              display: inline-block;
+              color: #fff;
+              line-height: 15px;
+              margin-right: 3px;
+              position: relative;
+              top: -3px;
+            }
+            span{
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 250px;
+              display: inline-block;
+            }
+          }
+          .act-row-num{
+            i{
+              border: 4px solid transparent;
+              border-top-color: #999;
+              display: inline-block;
+              margin-left: 2px;
+            }
+          }
+        }
+        .shop-info{
+          padding: 0 10px;
+          .shop-title{
+            i{
+              font-style: normal;
+              color: #6f3f15;
+              font-size: 12px;
+              padding: 3px;
+              display: inline-block;
+              transform: scale(.8);
+              font-weight: 700;
+              background: linear-gradient(-139deg,#fff100,#ffe339);
+            }
+            span{
+              margin-left: 4px;
+              font-weight: 700;
+              color: #333;
+            }
+          }
+          .star{
+            display: flex;
+            justify-content: space-between;
+            .star-info{
+              line-height: 1;
+              .star-n{
+                display: inline-block;
+                width: 72px;
+                overflow: hidden;
+                position: relative;
+                img{
+                  height: 12px;
+                  align-items: center;
+                  position: relative;
+                  top: 2px;
+                }
+                span{
+                  height: 100%;
+                  background-color: #fff;
+                  display: block;
+                  position: absolute;
+                  width: 100%;
+                  margin-left: 0;
+                  top: 0;
+                }
+              }
+              span{
+                font-size: 12px;
+                color: #999;
+                margin-left: 5px;
+              }
+            }
+            .specially span{
+              font-size: 12px;
+              border-radius: 2px;
+              color: #fff;
+              display: inline-block;
+              transform: scale(.9);
+              padding: 1px;
+              background: linear-gradient(45deg,#0085ff,#0af);
+            }
+          }
+          .money-limit{
+            display: flex;
+            justify-content: space-between;
+            span{
+              font-size: 12px;
+              color: #999;
+            }
+            i:after{
+              display: inline-block;
+              content: '';
+              height: 8px;
+              background-color: #999;
+              width: 1px;
+            }
+          }
         }
       }
     }
@@ -199,6 +396,70 @@
         p.addrInfo{
           font-size: 12px;
           font-weight: 400;
+        }
+      }
+    }
+  }
+  .search-food{
+    .search-warp{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      >a img{
+        height: 24px;
+        width: 24px;
+        transform: rotate(180deg);
+      }
+      div.input-warp{
+        width: calc(100% - 58px);
+        padding: 0 15px;
+        box-sizing: border-box;
+        position: relative;
+        input{
+          background-color: #f8f8f8;
+          color: #666;
+          border: none;
+          border-radius: 3px;
+          outline: none;
+          padding:8px 4px 8px 34px;
+          width: 84%;
+          :focus{
+            outline: none;
+          }
+        }
+        img{
+          position: absolute;
+          top: 4px;
+          left: 22px;
+          width: 24px;
+        }
+      }
+      span.btn{
+        width: 34px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #333;
+      }
+    }
+    .hot-search{
+      padding: 10px;
+      .hot-title{
+        color: #666;
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .hot-word{
+        margin-top: 6px;
+        font-weight: 400;
+        font-size: 14px;
+        color: #333;
+        .word{
+          padding: 8px;
+          margin: 8px;
+          display: inline-block;
+          background-color: #f7f7f7;
+          border-radius: 2px;
         }
       }
     }
