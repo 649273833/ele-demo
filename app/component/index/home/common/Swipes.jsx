@@ -1,5 +1,5 @@
 import React from "react";
-const MIN_TOUCH_DISTENCE = 150
+const MIN_TOUCH_DISTENCE = 100//最小拖动值
 class Page extends React.Component {
   state = {
     active:true,

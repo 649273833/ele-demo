@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios'
 import '../../../../public/css/userinfo.pcss'
+import ApiManager from '../../../../public/js/apiManager'
+import cookie from 'react-cookie'
 import {Modal,CenterHeader} from '../../common/Modal'
 let qs = require('qs');
 
@@ -18,6 +20,7 @@ class Index extends React.Component{
     sessionStorage.removeItem('isLogin')
     sessionStorage.removeItem('id')
     sessionStorage.removeItem('uheader')
+    cookie.remove('token')
     window.location.href='#/Center'
   }
   componentDidMount(){
@@ -39,22 +42,22 @@ class Index extends React.Component{
   fileUpChange = (e) => {
     var fileObj = e.target;
     let id = this.state.id
-    console.log(fileObj);
+    //console.log(fileObj);
     var fileEnd = fileObj.value.slice(fileObj.value.lastIndexOf('.'));
-    console.log(fileEnd)
+    //console.log(fileEnd)
     let fileTypeArr = ['.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG', '.SVG', '.svg']
     const isJPG = fileTypeArr.indexOf(fileEnd);
-    console.log(isJPG)
+    //console.log(isJPG)
     if (isJPG === -1) {
-      console.log('只能选择jpg/png格式的图片！');
+      //console.log('只能选择jpg/png格式的图片！');
       alert('只能选择jpg/png格式的图片！');
       e.target.value = ''
       return
     }
     const isLt2M = fileObj.files[0].size / 1024 / 1024 < 2;
-    console.log(fileObj.files[0].size)
+    //console.log(fileObj.files[0].size)
     if (!isLt2M) {
-      console.log('头像大小不能超过2M', Math.ceil(fileObj.files[0].size / 1024) + ' kb');
+      //console.log('头像大小不能超过2M', Math.ceil(fileObj.files[0].size / 1024) + ' kb');
       alert('头像大小不能超过2M', Math.ceil(fileObj.files[0].size / 1024) + ' kb');
       e.target.value = ''
       return
@@ -62,7 +65,7 @@ class Index extends React.Component{
     var windowURL = window.URL || window.webkitURL;
     if (fileObj && fileObj.files && fileObj.files[0]) {
       var blob = windowURL.createObjectURL(fileObj.files[0]);
-      console.log('BLOB:',blob)
+      //console.log('BLOB:',blob)
       // $img.setAttribute('src', blob);//js写法
       this.setState({ uheader: blob })
 
@@ -76,11 +79,11 @@ class Index extends React.Component{
           'uheader':base64,
           'id':id
         })
-        instance.post('https://api.uu20.top/api/upheader.php',data)
+        instance.post(ApiManager.upheader,data)
           .then(res=>{
-            console.log(res.data)
+            //console.log(res.data)
             if(res.data.code > 0){
-              console.log('上传成功！')
+              //console.log('上传成功！')
               alert('上传成功！')
               sessionStorage['uheader'] = base64;
               // location.reload()
@@ -90,7 +93,7 @@ class Index extends React.Component{
             }
           })
           .catch((res)=>{
-            console.log(res)
+            //console.log(res)
             alert('网络错误，请稍后重试！')
           })
       };
@@ -98,11 +101,11 @@ class Index extends React.Component{
     reader.readAsDataURL( fileObj.files[0] );
   }
 
-  getBase64 = (imgUrl) => {
+  getBase64 = (imgUrl) => {//暂时没有使用这块代码
     let id = this.state.id
 
-    console.log(64)
-    console.log(id)
+    //console.log(64)
+    //console.log(id)
     window.URL = window.URL || window.webkitURL;
     try {
       var xhr = new XMLHttpRequest();
@@ -113,21 +116,21 @@ class Index extends React.Component{
         if (this.status == 200) {
           //得到一个blob对象
           var blob = this.response;
-          // console.log("blob", blob)
+          // //console.log("blob", blob)
           // 至关重要
           let oFileReader = new FileReader();
           oFileReader.onloadend = function (e) {
             let base64 = e.target.result;
-            axios.get('https://api.uu20.top/api/upheader.php',{
+            axios.get(ApiManager.upheader,{
               params:{
                 uheader:base64,
                 id:id
               }
             })
               .then(res=>{
-                console.log(res.data)
+                //console.log(res.data)
                 if(res.data.code > 0){
-                  console.log('上传成功！')
+                  //console.log('上传成功！')
                   alert('上传成功！')
                   sessionStorage['uheader'] = base64;
                   // location.reload()
@@ -137,7 +140,7 @@ class Index extends React.Component{
                 }
               })
               .catch((res)=>{
-                console.log(res)
+                //console.log(res)
                 alert('网络错误，请稍后重试！')
               })
           };

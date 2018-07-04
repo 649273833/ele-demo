@@ -32,14 +32,14 @@ class Index extends React.Component{
         if(this.isCompositions){
           // this.props.onChange({target:{value:this.inputRef.value}})
           this.setState({value:this.inputRef.value})
-          this.handelSearch(this.inputRef.value)
+          this.handleSearch(this.inputRef.value)
         }
       }.bind(this),100)
     }.bind(this));
   }
 
 
-  handelSearch = (value) =>{
+  handleSearch = (value) =>{
     let url = 'https://api.map.baidu.com/geocoder/v2/?callback=renderOption&output=json&address='+value+'&city=&ak=adyHtftfE9CuhY3pqKf7EvcL1S21ZGkQ'
     // let url = 'https://apis.map.qq.com/ws/place/v1/search?&page_size=20&page_index=1&&orderby=_distance&key=ZG2BZ-XSY33-FOC3E-YIYEH-REYY3-3YFWE'
     jsonp(url)

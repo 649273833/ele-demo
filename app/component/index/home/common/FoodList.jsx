@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios'
-import '../../../../../mock/homeList'
+import ApiManager from '../../../../public/js/apiManager'
 import ReactPullLoad,{STATS} from 'react-pullload'
-import {AlertLogin,LoadingText,Loaderr,CenterHeader} from '../../common/Modal'
+import {LoadingText} from '../../common/Modal'
+import {Link} from 'react-router-dom'
+import FoodDetail from './fooddetail.bundle';
 class Index extends React.Component{
   state ={
     hasMore: true,
@@ -16,7 +18,7 @@ class Index extends React.Component{
     this.handleList()
   }
   handleList = () =>{
-    axios.get('./mock/userinfo/foodlist.mock')
+    axios.get(ApiManager.foodlist)
       .then(res=>{
         if(res.data.code > 0){
           let data = res.data.data.foodlist
@@ -71,7 +73,7 @@ class Index extends React.Component{
           loading:6
         });
       } else{
-        axios.get('./mock/userinfo/foodlist.mock')
+        axios.get(ApiManager.foodlist)
           .then(res=>{
             let data = res.data.data.foodlist;
             if(data && res.data.code > 0){
@@ -106,69 +108,78 @@ class Index extends React.Component{
         >
           {
             data && data.map((val)=>
-              <div className='list-items' key={val.id}>
-                <div className='food-img'>
-                  <img src={require('../../../../public/img/73972a0237f055e8858c6c6e80730jpeg.png')} alt=""/>
-                </div>
-                <div className='shop-info'>
-                  <p className='shop-title'>
-                    <i>品牌</i>
-                    <span>{val.name}</span>
-                  </p>
-                  <div className='star'>
-                    <div className='star-info'>
-                      <div className='star-n'>
-                        <img src={require('../../../../public/img/star-food.png')} alt=""/>
-                        <span style={{left:(val.star * 20) + '%'}}></span>
+              <Link
+                to={{
+                  pathname:'/Home/FoodDetail',
+                  search:'id=' + val.id
+                }}
+                key={val.id}
+                target='_self'
+              >
+                <div className='list-items'>
+                  <div className='food-img'>
+                    <img src={require('../../../../public/img/73972a0237f055e8858c6c6e80730jpeg.png')} alt=""/>
+                  </div>
+                  <div className='shop-info'>
+                    <p className='shop-title'>
+                      <i>品牌</i>
+                      <span>{val.name}</span>
+                    </p>
+                    <div className='star'>
+                      <div className='star-info'>
+                        <div className='star-n'>
+                          <img src={require('../../../../public/img/star-food.png')} alt=""/>
+                          <span style={{left:(val.star * 20) + '%'}}></span>
+                        </div>
+                        <span>{val.star}</span>
+                        <span>月售{val.sellnum}单</span>
                       </div>
-                      <span>{val.star}</span>
-                      <span>月售{val.sellnum}单</span>
+                      <div className='specially'>
+                        <span>{val.specially ? '蜂鸟专送' : ''}</span>
+                      </div>
                     </div>
-                    <div className='specially'>
-                      <span>{val.specially ? '蜂鸟专送' : ''}</span>
+                    <div className='money-limit'>
+                      <div><span>￥{val.startPrice}起送</span> <i/> <span>优惠配送费¥{val.speciallyPrice}</span></div>
+                      <div><span>{val.distance}km</span> <i/> <span>{val.time > 60 ? (1 + '小时' + (val.time -  60)  + '分钟' ) : (val.time + '分钟')}</span></div>
                     </div>
                   </div>
-                  <div className='money-limit'>
-                    <div><span>￥{val.startPrice}起送</span> <i/> <span>优惠配送费¥{val.speciallyPrice}</span></div>
-                    <div><span>{val.distance}km</span> <i/> <span>{val.time > 60 ? (1 + '小时' + (val.time -  60)  + '分钟' ) : (val.time + '分钟')}</span></div>
-                  </div>
-                </div>
-                <div className='activity-wrap'>
-                  <p className='source-tag'>
-                    <img src={require('../../../../public/img/24c767ffa7fd296d3e2d6f01798c6png.png')} alt=""/>
-                    <span>口碑人气好店</span>
-                  </p>
-                  <div className='act-row'>
-                    <p className='act-row-info'>
-                      <i>首</i>
-                      <span>新用户下单立减{val.sub}</span>
+                  <div className='activity-wrap'>
+                    <p className='source-tag'>
+                      <img src={require('../../../../public/img/24c767ffa7fd296d3e2d6f01798c6png.png')} alt=""/>
+                      <span>口碑人气好店</span>
                     </p>
-                    <p
-                      className='act-row-num'
-                      onClick={()=>this.handleMore(val.id,val.status === true ? false : true)}
-                    >
-                      <span>{val.more.length}个活动</span>
-                      <i/>
-                    </p>
-                  </div>
-                  <div className='act-more'>
-                    <p className='act-more-info'>
-                      <i>满</i>
-                      <span>满20减12，满35减22，满50减30，满70减38，满100减55</span>
-                    </p>
-                    {
-                      val.status && val.more ?
-                      val.more.map((more)=>
-                          <p className='act-more-info' key={more.mid}>
-                            <i>满</i>
-                            <span>{more.name}</span>
-                          </p>
+                    <div className='act-row'>
+                      <p className='act-row-info'>
+                        <i>首</i>
+                        <span>新用户下单立减{val.sub}</span>
+                      </p>
+                      <p
+                        className='act-row-num'
+                        onClick={()=>this.handleMore(val.id,val.status === true ? false : true)}
+                      >
+                        <span>{val.more.length}个活动</span>
+                        <i/>
+                      </p>
+                    </div>
+                    <div className='act-more'>
+                      <p className='act-more-info'>
+                        <i>满</i>
+                        <span>满20减12，满35减22，满50减30，满70减38，满100减55</span>
+                      </p>
+                      {
+                        val.status && val.more ?
+                          val.more.map((more)=>
+                            <p className='act-more-info' key={more.mid}>
+                              <i>满</i>
+                              <span>{more.name}</span>
+                            </p>
                           )
-                        : ''
-                    }
+                          : ''
+                      }
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             )
           }
           {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import '../../../../../mock/userinfo'
+import ApiManager from '../../../../public/js/apiManager'
 import Footer from '../../common/Footer'
 import {CenterHeader} from '../../common/Modal'
 class Index extends React.Component{
@@ -34,7 +34,7 @@ class Index extends React.Component{
         this.setState({isLogin:false});
       }
 
-      axios.get('./mock/userinfo/info.mock')
+      axios.get(ApiManager.info)
         .then(res=>{
           let wallte = res.data.data.data.wallte;
           let redenv = res.data.data.data.redenv;

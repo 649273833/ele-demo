@@ -128,6 +128,10 @@
       }
     }
     .food-list{
+      a{
+        text-decoration: none;
+        color: #999;
+      }
       .recommended{
         text-align: center;
         font-size: 16px;
@@ -422,16 +426,22 @@
           border: none;
           border-radius: 3px;
           outline: none;
-          padding:8px 4px 8px 34px;
-          width: 84%;
+          padding:8px 24px 8px 34px;
+          width: 78%;
           :focus{
             outline: none;
           }
         }
-        img{
+        img:first-child{
           position: absolute;
           top: 4px;
           left: 22px;
+          width: 24px;
+        }
+        img.search-food-clear{
+          position: absolute;
+          top: 4px;
+          right: 16px;
           width: 24px;
         }
       }
@@ -460,6 +470,107 @@
           display: inline-block;
           background-color: #f7f7f7;
           border-radius: 2px;
+        }
+      }
+    }
+  }
+  .food-detail{
+    .detail-header{
+      height: 98px;
+      background: url("../img/4b94bab83fb7a5af4f11bb359b54cpng.png") no-repeat ;
+      -webkit-background-size: 100% 110%;
+      background-size: 100% 110%;
+      position: relative;
+      .banner-merchants{
+        height: 44px;
+        background-color: transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .detail-header-back{
+          border: 2px solid transparent;
+          border-top-color: #fff;
+          border-left-color: #fff;
+          transform: rotate(-45deg);
+          display: inline-block;
+          padding: 6px;
+          margin: 10px 16px;
+        }
+      }
+    }
+    .detail-header:before{
+      display: block;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: linear-gradient(0deg,hsla(0,0%,100%,0),rgba(0,0,0,.5));
+    }
+    .detail-warp{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      img:first-child{
+        width: 65px;
+        position: relative;
+        top: -44px;
+      }
+      .warp-info{
+        margin-top: -36px;
+        border-top: 1px solid transparent;
+        .shop-title{
+          text-align: center;
+          i{
+            display: inline-block;
+            padding: 2px;
+            font-size: 12px;
+            font-style: normal;
+            color: #6a3709;
+            font-weight: 700;
+            border-radius: 2px;
+            position: relative;
+            top: -2px;
+            right: 4px;
+            background-image: linear-gradient(90deg,#fff100,#ffe339);
+          }
+          span{
+            color: #333;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 2px;
+          }
+          s{
+            display: inline-block;
+            border: 6px solid transparent;
+            border-left-color: rgba(0,0,0,.67);
+            margin: 0 0 0 3px;
+          }
+        }
+        .shop-info{
+          .info-detail{
+            text-align: center;
+            span{
+              color: #666;
+              font-size: 12px;
+              font-weight: 400;
+              display: inline-block;
+              margin: 3px 2px;
+            }
+          }
+          .shop-alert{
+            font-size: 12px;
+            display: block;
+            margin: 3px 6px;
+            text-align: center;
+            font-weight: 300;
+            color: #999;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
         }
       }
     }

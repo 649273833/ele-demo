@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import '../../../../../mock/userinfo'
+import ApiManager from '../../../../public/js/apiManager'
 import {Link} from 'react-router-dom';
 import {Modal,Loaderr,CenterHeader} from '../../common/Modal'
 class Index extends React.Component{
@@ -16,7 +16,7 @@ class Index extends React.Component{
     let isLogins = sessionStorage['isLogin'];
     if(isLogins){
       this.setState({isLogin:true})
-      axios.get('./mock/userinfo/info.mock')
+      axios.get(ApiManager.info)
         .then(res=>{
           let data = res.data.data.address;
           if(res.data.code > 0){

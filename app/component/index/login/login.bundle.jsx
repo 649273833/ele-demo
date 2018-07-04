@@ -2,7 +2,8 @@ import React from 'react';
 import {Provider,connect} from 'react-redux';
 import axios from 'axios';
 import store from '../common/store';
-
+import cookie from 'react-cookie'
+import ApiManager from '../../../public/js/apiManager'
 
 class Index extends React.Component{
   state = {
@@ -18,7 +19,7 @@ class Index extends React.Component{
   handleBtn = () =>{
     let {uname,upwd} = this.state;
     if(uname && upwd){
-      axios.get('https://api.uu20.top/api/elelogin.php',{
+      axios.get(ApiManager.elelogin,{
         params:{
           uname:uname,
           upwd:upwd,
@@ -32,6 +33,10 @@ class Index extends React.Component{
             sessionStorage['id'] = res.data.data.id;
             sessionStorage['uheader'] = res.data.data.uheader;
             window.location.href='#/Center'
+            let token = 123123
+            cookie.save(
+              'token', token, {path: '/', maxAge:new Date().setDate(new Date().getDate()+30) }
+            );
           }
         })
         .catch(res=>{
