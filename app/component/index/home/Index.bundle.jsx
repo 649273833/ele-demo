@@ -6,6 +6,9 @@ import HomeList from './common/homeList.bundle';
 import SearchLocation from './common/searchLocation.bundle'
 import SearchFood from './common/searchFood.bundle'
 import FoodDetail from './common/fooddetail.bundle'
+import ShopFoodList from './common/shopfoodlist.bundle';
+import Evaluation from './common/evaluation.bundle';
+import Shop from './common/shop.bundle';
 class Index extends React.Component{
   componentDidMount(){
 
@@ -20,7 +23,9 @@ class Index extends React.Component{
             <Route path='/Home/SearchLocation' component={() =>BundleFun(SearchLocation)}/>
             <Route path='/Home/SearchFood' component={() =>BundleFun(SearchFood)}/>
             <Route path='/Home/FoodDetail' component={() =>BundleFun(FoodDetail)}/>
-
+            {/*<Route path='/Home/ShopFoodList' component={() =>BundleFun(ShopFoodList)}/>*/}
+            {/*<Route path='/Home/Evaluation' component={() =>BundleFun(Evaluation)}/>*/}
+            {/*<Route path='/Home/Shop' component={() =>BundleFun(Shop)}/>*/}
           </div>
         </HashRouter>
       </div>

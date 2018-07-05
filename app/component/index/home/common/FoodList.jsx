@@ -4,7 +4,6 @@ import ApiManager from '../../../../public/js/apiManager'
 import ReactPullLoad,{STATS} from 'react-pullload'
 import {LoadingText} from '../../common/Modal'
 import {Link} from 'react-router-dom'
-import FoodDetail from './fooddetail.bundle';
 class Index extends React.Component{
   state ={
     hasMore: true,
@@ -108,41 +107,43 @@ class Index extends React.Component{
         >
           {
             data && data.map((val)=>
-              <Link
-                to={{
-                  pathname:'/Home/FoodDetail',
-                  search:'id=' + val.id
-                }}
-                key={val.id}
-                target='_self'
-              >
-                <div className='list-items'>
+
+                <div className='list-items' key={val.id}>
                   <div className='food-img'>
                     <img src={require('../../../../public/img/73972a0237f055e8858c6c6e80730jpeg.png')} alt=""/>
                   </div>
-                  <div className='shop-info'>
-                    <p className='shop-title'>
-                      <i>品牌</i>
-                      <span>{val.name}</span>
-                    </p>
-                    <div className='star'>
-                      <div className='star-info'>
-                        <div className='star-n'>
-                          <img src={require('../../../../public/img/star-food.png')} alt=""/>
-                          <span style={{left:(val.star * 20) + '%'}}></span>
+                  <Link
+                    to={{
+                      pathname:'/Home/FoodDetail',
+                      // search:'id=' + val.id   页面加载会从新加载mock，会导致地址栏id变化，暂时使用固定id
+                      search:'id=1'
+                    }}
+                    target='_self'
+                  >
+                    <div className='shop-info'>
+                      <p className='shop-title'>
+                        <i>品牌</i>
+                        <span>{val.name}</span>
+                      </p>
+                      <div className='star'>
+                        <div className='star-info'>
+                          <div className='star-n'>
+                            <img src={require('../../../../public/img/star-food.png')} alt=""/>
+                            <span style={{left:(val.star * 20) + '%'}}></span>
+                          </div>
+                          <span>{val.star}</span>
+                          <span>月售{val.sellnum}单</span>
                         </div>
-                        <span>{val.star}</span>
-                        <span>月售{val.sellnum}单</span>
+                        <div className='specially'>
+                          <span>{val.specially ? '蜂鸟专送' : ''}</span>
+                        </div>
                       </div>
-                      <div className='specially'>
-                        <span>{val.specially ? '蜂鸟专送' : ''}</span>
+                      <div className='money-limit'>
+                        <div><span>￥{val.startPrice}起送</span> <i/> <span>优惠配送费¥{val.speciallyPrice}</span></div>
+                        <div><span>{val.distance}km</span> <i/> <span>{val.time > 60 ? (1 + '小时' + (val.time -  60)  + '分钟' ) : (val.time + '分钟')}</span></div>
                       </div>
                     </div>
-                    <div className='money-limit'>
-                      <div><span>￥{val.startPrice}起送</span> <i/> <span>优惠配送费¥{val.speciallyPrice}</span></div>
-                      <div><span>{val.distance}km</span> <i/> <span>{val.time > 60 ? (1 + '小时' + (val.time -  60)  + '分钟' ) : (val.time + '分钟')}</span></div>
-                    </div>
-                  </div>
+                  </Link>
                   <div className='activity-wrap'>
                     <p className='source-tag'>
                       <img src={require('../../../../public/img/24c767ffa7fd296d3e2d6f01798c6png.png')} alt=""/>
@@ -179,7 +180,7 @@ class Index extends React.Component{
                     </div>
                   </div>
                 </div>
-              </Link>
+
             )
           }
           {

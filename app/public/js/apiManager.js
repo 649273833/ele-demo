@@ -22,5 +22,7 @@ export default {
   'foodlist':postApi('https:api.uu20.top/api/foodlist.php',1),
   'searchlist':postApi('https:api.uu20.top/api/searchlist.php',1),
   'tuijianlist':postApi('https:api.uu20.top/api/tuijianlist.php',1),
+  'shoplist':postApi('https:api.uu20.top/api/shoplist.php',1),
+  'shopitems':postApi('https:api.uu20.top/api/shopitems.php',1),
 
 }

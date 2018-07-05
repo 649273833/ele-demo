@@ -8,4 +8,86 @@ const LoactionErr = () =>
       手动选择地址
     </Link>
   </div>
-export {LoactionErr}
+
+
+class ShopModal extends React.Component{
+  render(){
+    let {handleModal,modal,name,star,num,time,distance} = this.props
+    return(
+      <div className='shop-title-modal'>
+        <div className='modal-bg'  onClick={()=>handleModal(modal ? false : true)}/>
+        <div className='box'>
+          <div className='shop-title' >
+            <i>品牌</i>
+            <span>{name}</span>
+          </div>
+          <ul>
+            <li className='brief-modal'>
+              <h3>{star}</h3>
+              <p>评分</p>
+            </li>
+            <li className='brief-modal'>
+              <h3>{num}单</h3>
+              <p>月售</p>
+            </li>
+            <li className='brief-modal'>
+              <h3>蜂鸟快送</h3>
+              <p>约{time}</p>
+            </li>
+            <li className='brief-modal'>
+              <h3>3元</h3>
+              <p>配送费</p>
+            </li>
+            <li className='brief-modal'>
+              <h3>{distance}km</h3>
+              <p>距离</p>
+            </li>
+          </ul>
+          <h3 className='modal-notice'><span>公告</span></h3>
+          <p className='brief-intr'>
+            芝根芝底披萨是全国西餐连锁品牌，纯正的品质，优质的服务，期待您的光临！
+          </p>
+        </div>
+      </div>
+    )
+  }
+}
+class MoreModal extends React.Component{
+  render(){
+    let {more,moreModal,handleMoreModal} = this.props
+    return(
+      <div className='more-modal'>
+        <div className='modal-bg' onClick={()=>handleMoreModal(moreModal ? false : true)}/>
+        <div className='box'>
+          <h3 className='more-modal-title'>优惠活动</h3>
+          <img
+            className='more-moadl-close'
+            src={require('../../../../public/img/search-close-gray.png')}
+            alt=""
+            onClick={()=>handleMoreModal(moreModal ? false : true)}
+          />
+          <div className='act-itmes-box'>
+            <p className='activity-info'>
+              <i>首单</i>
+              <span>新用户下单立减30元(不与其它活动同享)</span>
+            </p>
+            <p className='act-more-info'>
+              <i>减满</i>
+              <span>满20减12，满35减22，满50减30，满70减38，满100减55</span>
+            </p>
+            {
+              more && more.map((more)=>
+                <p className='act-more-items' key={more.mid}>
+                  <i>特价</i>
+                  <span>{more.name}</span>
+                </p>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+export {LoactionErr,ShopModal,MoreModal}
