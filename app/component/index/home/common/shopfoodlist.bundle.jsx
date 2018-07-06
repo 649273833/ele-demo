@@ -4,9 +4,14 @@ import {urlParam} from '../../../../public/js/utils';
 import axios from 'axios'
 import ApiManager from '../../../../public/js/apiManager'
 import {MyAnchor} from '../../../../public/js/utils'
+import {Provider,connect} from 'react-redux';
+import store from '../../common/store'
+import ShopCar from './shopcar'
+import {accAdd,Subtr,accMul,accDiv} from '../../../../public/js/utils';
+
 class ShopFoodList extends React.Component{
   state = {
-    list:''
+    list:'',
   }
   componentDidMount(){
     let id = urlParam('id',window.location.href)
@@ -22,12 +27,29 @@ class ShopFoodList extends React.Component{
         }
       })
   }
+
+  handleNum = (price,id,fid,type) =>{
+    this.props.dispatch({type:type,price:price})
+    let list = this.state.list
+    let children = list.find(data=> data.id === id).children
+    if(type === 'Addcar'){
+      children.find(data=> data.fid === fid).nownum += 1
+    }else if(type === 'Subtractcar'){
+      children.find(data=> data.fid === fid).nownum -= 1
+    }
+    this.setState({list})
+  }
   render(){
+    let {list} = this.state;
     return(
       <div className='shop-food-list'>
         <div className='left-list'>
           <ul>
-            <li onClick={()=>MyAnchor('spin1')}>热销</li>
+            {
+              list && list.map((data)=>
+                <li onClick={()=>MyAnchor(data.anchor)} key={data.id}>{data.name}</li>
+              )
+            }
             {/*<li>优惠</li>*/}
             {/*<li>店长推荐</li>*/}
             {/*<li>9寸现烤比萨</li>*/}
@@ -42,29 +64,76 @@ class ShopFoodList extends React.Component{
           </ul>
         </div>
         <div className='right-list'>
-          <div className='items' id='spin1'>
-            <span className='food-img'>
-              <img src={require('../../../../public/img/5c604129ba9ef68c94e6be1179e09jpeg.png')} alt=""/>
-            </span>
-            <div className='food-intr'>
-              <h3>意大利酱面</h3>
-              <p>热卖产品</p>
-              <p>
-                <span>月售343分</span>
-                <span>好评率92%</span>
-              </p>
-              <div className='food-price'>
-                <p>￥<span>24</span></p>
-                <span
-                  className='add-car'
-                  onClick={()=>console.log('加入购物车了')}
-                >+</span>
+          {
+            list && list.map((data)=>
+              <div id={data.anchor} key={data.id}>
+                {
+                  data.children && data.children.map((child)=>
+                    <div className='items'  key={child.fid}>
+                      <span className='food-img'>
+                        <img src={require('../../../../public/img/5c604129ba9ef68c94e6be1179e09jpeg.png')} alt=""/>
+                      </span>
+                      <div className='food-intr'>
+                        <h3>{child.foodname}</h3>
+                        <p>热卖产品</p>
+                        <p>
+                          <span>月售{child.pricenum}份</span>
+                          <span>好评率{child.praise}%</span>
+                        </p>
+                        <div className='food-price'>
+                          <p>￥
+                            <span>
+                              {
+                                child.discount ? (accDiv(Math.ceil(accMul(accMul(child.discountnum,child.price),100)),100)) : child.price
+                              }
+                            </span>
+                            <s  className={child.discount ? 'discount' : ''}>
+                              {
+                                child.discount ? '￥' + child.price : ''
+                              }
+                            </s>
+                          </p>
+                          <div className='price-box'>
+                            <span
+                              className={child.nownum ? 'subtract-car active' : 'subtract-car'}
+                              onClick={(price,id,fid,type)=>this.handleNum(
+                                child.discount ? (accDiv(Math.ceil(accMul(accMul(child.discountnum,child.price),100)),100)) : child.price,
+                                data.id,
+                                child.fid,
+                                'Subtractcar'
+                              )}>-</span>
+                            <span
+                              className={child.nownum ? 'nownum active' : 'nownum'}
+                            >{child.nownum}</span>
+                            <span
+                              className='add-car'
+                              onClick={(price,id,fid,type)=>this.handleNum(
+                                child.discount ? (accDiv(Math.ceil(accMul(accMul(child.discountnum,child.price),100)),100)) : child.price,
+                                data.id,
+                                child.fid,
+                                'Addcar'
+                              )}>+</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
               </div>
-            </div>
-          </div>
+            )
+          }
         </div>
+        <ShopCar/>
       </div>
     )
   }
 }
-export default ShopFoodList
+
+const mapStateToProps = state =>({storeState:state})
+const Main = connect(
+  mapStateToProps
+)(ShopFoodList)
+export default ()=>
+  <Provider store={store}>
+    <Main/>
+  </Provider>

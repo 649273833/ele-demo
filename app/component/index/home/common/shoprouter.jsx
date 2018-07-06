@@ -13,7 +13,7 @@ class ShopRouter extends React.Component{
   }
   handleScroll = () =>{
     let scrollTop = window.pageYOffset
-    if(scrollTop>255){
+    if(scrollTop > 255){
       this.setState({navbar:true})
     }else{
       this.setState({navbar:false})

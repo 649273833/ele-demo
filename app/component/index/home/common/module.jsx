@@ -45,8 +45,11 @@ class ShopModal extends React.Component{
           </ul>
           <h3 className='modal-notice'><span>公告</span></h3>
           <p className='brief-intr'>
-            芝根芝底披萨是全国西餐连锁品牌，纯正的品质，优质的服务，期待您的光临！
+            欢迎光临，用餐高峰期请提前下单，谢谢。
           </p>
+          <div className='close' onClick={()=>handleModal(modal ? false : true)}>
+            <span>+</span>
+          </div>
         </div>
       </div>
     )
