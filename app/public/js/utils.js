@@ -63,4 +63,6 @@ let Subtr = (arg1,arg2) =>{//高精度计算减法
   n=(r1>=r2)?r1:r2;
   return ((arg1*m-arg2*m)/m).toFixed(n);
 }
-export {urlParam,isMobile,MyAnchor,pathname,accDiv,accMul,accAdd,Subtr}
+
+
+export {urlParam,isMobile,MyAnchor,pathname,accDiv,accMul,accAdd,Subtr,}

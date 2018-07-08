@@ -9,16 +9,16 @@ class ShopRouter extends React.Component{
     navbar:false
   }
   componentDidMount (){
-    window.addEventListener('scroll',this.handleScroll)
+    // window.addEventListener('scroll',this.handleScroll)
   }
-  handleScroll = () =>{
-    let scrollTop = window.pageYOffset
-    if(scrollTop > 255){
-      this.setState({navbar:true})
-    }else{
-      this.setState({navbar:false})
-    }
-  }
+  // handleScroll = () =>{
+  //   let scrollTop = window.pageYOffset
+  //   if(scrollTop > 255){
+  //     this.setState({navbar:true})
+  //   }else{
+  //     this.setState({navbar:false})
+  //   }
+  // }
   render(){
     let id = this.props.id;
     let {navbar} = this.state

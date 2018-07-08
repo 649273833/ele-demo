@@ -11,20 +11,50 @@ a{text-decoration: none;color: #333}
       height: 100vh;
       overflow-y: scroll;
       grid-template-columns: 80px 1fr;
+      position: relative;
       .left-list{
         ul{
           height: 100vh;
           background-color: #f8f8f8;
           overflow-y: scroll;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 80px;
           li{
             padding: 4.666667vw 2vw;
             border-bottom: 1px solid #e8e8e8;
             font-size: .32rem;
             color: #666;
+            position: relative;
+            i {
+              background: linear-gradient(-90deg, #ff7416, #ff3c15 98%);
+              display: none;
+              font-style: normal;
+              padding: .533333vw 1.333333vw;
+              border-radius: 3.2vw;
+              overflow: hidden;
+              position: absolute;
+              top: 0;
+              font-size: 12px;
+              color: #fff;
+              line-height: 1;
+              right: 0;
+              transform: scale(.8);
+              &.active {
+                display: inline-block;
+              }
+            }
           }
         }
       }
       .right-list{
+        height: 100vh;
+        overflow-y: scroll;
+        position: absolute;
+        top: 0;
+        left: 80px;
+        width: calc(100% - 80px);
         .items{
           display: flex;
           .food-img{
@@ -79,6 +109,7 @@ a{text-decoration: none;color: #333}
                   font-weight: bold;
                   color: #fff;
                   background-color: #2395ff;
+                  border: 1px solid #2395ff;
                 }
                 .subtract-car{
                   display: none;
@@ -112,6 +143,110 @@ a{text-decoration: none;color: #333}
         bottom: 0;
         left: 0;
         z-index: 99;
+        .car-modal{
+          background-color: #f8f8f8;
+          .modal-bg{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 64px;
+            z-index: 2;
+            background-color: rgba(0,0,0,.5);
+          }
+          .box{
+            position: relative;
+            z-index: 99;
+            background-color: #fff;
+            width: 100%;
+            max-height: 50vh;
+            .carview-header{
+              height: 40px;
+              background-color: #eceff1;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: #666;
+              font-size: 14px;
+              padding: 0 10px;
+              span:first-child{
+                font-size: 16px;
+                border-left: 1vw solid #2395ff;
+                padding-left: 6px;
+              }
+              span:last-child{
+                img{
+                  width: 20px;
+                  vertical-align: text-bottom;
+                }
+              }
+            }
+            .entity-list{
+              overflow: scroll;
+              width: 100%;
+              max-height: calc(50vh - 40px);
+              li.entity-row{
+                display: flex;
+                height: 50px;
+                padding: 5px 10px;
+                border-bottom: 1px solid #eee;
+                justify-content: space-between;
+                align-items: center;
+                .entity-row-title{
+                  display: flex;
+                  flex: 7;
+                  justify-content: space-between;
+                  align-items: center;
+                  color: #333;
+                  p{
+                    color: #f60;
+                    font-weight: 700;
+                    font-size: 12px;
+                    span{
+                      font-size: 16px;
+                    }
+                  }
+                }
+                .entity-row-num{
+                  flex: 3;
+                  text-align: right;
+                  .subr,.add{
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    text-align: center;
+                    line-height: 17px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #fff;
+                    background-color: #2395ff;
+                    border: 1px solid #2395ff;
+                  }
+                  .nownum{
+                    color: #666;
+                    font-size: 12px;
+                    text-align: center;
+                    line-height: 20px;
+                    min-width: 6vw;
+                    max-width: 12vw;
+                    overflow: hidden;
+                    padding: 0 4px;
+                    display: inline-block;
+                  }
+                  .subr{
+                    right: 60px;
+                    color: #2395ff;
+                    line-height: 17px;
+                    background-color: #fff;
+                    border: 1px solid #2395ff;
+                  }
+                }
+              }
+            }
+          }
+        }
         .activity{
           background-color: #fffad6;
           font-size: 12px;
@@ -135,11 +270,13 @@ a{text-decoration: none;color: #333}
               border-radius: 3.2vw;
               overflow: hidden;
               position: absolute;
+              z-index: 100;
               top: -14px;
               font-size: 12px;
               color: #fff;
               line-height: 1;
               left: 48px;
+              transform: scale(.9);
               &.active{
                 display: inline-block;
               }
@@ -151,6 +288,7 @@ a{text-decoration: none;color: #333}
               position: absolute;
               top: -10px;
               right: 16px;
+              z-index: 100;
               border-radius: 50%;
               overflow: hidden;
               box-sizing: border-box;

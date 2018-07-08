@@ -12,6 +12,7 @@ import {accAdd,Subtr,accMul,accDiv} from '../../../../public/js/utils';
 class ShopFoodList extends React.Component{
   state = {
     list:'',
+    data:''
   }
   componentDidMount(){
     let id = urlParam('id',window.location.href)
@@ -23,31 +24,38 @@ class ShopFoodList extends React.Component{
       .then(res=>{
         if(res.data.code>0){
           let list = res.data.data.shoplist
+          console.log(list)
           this.setState({list})
         }
       })
   }
 
-  handleNum = (price,id,fid,type) =>{
-    this.props.dispatch({type:type,price:price})
+  handleShopCar = (price,id,fid,type) =>{
+    this.props.dispatch({type:'ShopCar',act:{price:price,types:type}})
     let list = this.state.list
     let children = list.find(data=> data.id === id).children
     if(type === 'Addcar'){
+      list.find(data=> data.id === id).listnownum += 1
       children.find(data=> data.fid === fid).nownum += 1
     }else if(type === 'Subtractcar'){
+      list.find(data=> data.id === id).listnownum -= 1
       children.find(data=> data.fid === fid).nownum -= 1
     }
     this.setState({list})
   }
   render(){
     let {list} = this.state;
+    let {shopprice} = this.props.storeState;
     return(
       <div className='shop-food-list'>
         <div className='left-list'>
           <ul>
             {
               list && list.map((data)=>
-                <li onClick={()=>MyAnchor(data.anchor)} key={data.id}>{data.name}</li>
+                <li onClick={()=>MyAnchor(data.anchor)} key={data.id}>
+                  {data.name}:{data.id}
+                  <i className={data.listnownum > 0 ? 'active' : ''} >{data.listnownum}</i>
+                </li>
               )
             }
             {/*<li>优惠</li>*/}
@@ -84,7 +92,7 @@ class ShopFoodList extends React.Component{
                           <p>￥
                             <span>
                               {
-                                child.discount ? (accDiv(Math.ceil(accMul(accMul(child.discountnum,child.price),100)),100)) : child.price
+                                child.discount ? accDiv(accMul(child.discountnum,child.price),100) : child.price
                               }
                             </span>
                             <s  className={child.discount ? 'discount' : ''}>
@@ -96,19 +104,20 @@ class ShopFoodList extends React.Component{
                           <div className='price-box'>
                             <span
                               className={child.nownum ? 'subtract-car active' : 'subtract-car'}
-                              onClick={(price,id,fid,type)=>this.handleNum(
-                                child.discount ? (accDiv(Math.ceil(accMul(accMul(child.discountnum,child.price),100)),100)) : child.price,
+                              onClick={(price,id,fid,type)=>this.handleShopCar(
+                                child.discount ? accDiv(accMul(child.discountnum,child.price),100) : child.price,
                                 data.id,
                                 child.fid,
                                 'Subtractcar'
                               )}>-</span>
                             <span
                               className={child.nownum ? 'nownum active' : 'nownum'}
-                            >{child.nownum}</span>
+                            >{child.nownum}
+                            </span>
                             <span
                               className='add-car'
-                              onClick={(price,id,fid,type)=>this.handleNum(
-                                child.discount ? (accDiv(Math.ceil(accMul(accMul(child.discountnum,child.price),100)),100)) : child.price,
+                              onClick={(price,id,fid,type)=>this.handleShopCar(
+                                child.discount ? accDiv(accMul(child.discountnum,child.price),100) : child.price,
                                 data.id,
                                 child.fid,
                                 'Addcar'
