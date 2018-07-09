@@ -97,8 +97,10 @@ Mock.mock(/\/tuijianlist.mock/,{
 Mock.mock(/\/shoplist.mock/,{
   'code':1,
   data:{
+    'startPrice|0-50':10,
     'shoplist|5-20':[{
       'id|+1':1,
+      'listnownum':0,
       'name':Mock.Random.ctitle(1,4),
       'anchor':'Anchor@id',
       'children|1-5':[{
@@ -108,10 +110,19 @@ Mock.mock(/\/shoplist.mock/,{
         'praise|0-100':92,
         'discount|':true,
         'price|0-50':25,
-        'discountnum|0-0.1':0.8,
+        'test':this.discount,
+        'discountnum|0-100':80,
         'nownum':0
       }]
     }]
+  },
+  'message':'获取成功！',
+  'systemDate':new Date().getTime()
+})
+Mock.mock(/\/settle.mock/,{
+  'code':1,
+  data:{
+    'result':'好了,外卖已经点好了，安心学习吧！',
   },
   'message':'获取成功！',
   'systemDate':new Date().getTime()

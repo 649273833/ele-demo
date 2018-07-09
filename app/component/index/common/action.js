@@ -90,4 +90,9 @@ let SearchLocation = (latlon) => (dispatch)=>{
       dispatch({type:'setLocationList',locationList:''})
     })
 }
-export {getLocation,showPosition,showError,SearchLocation}
+
+
+let  handleShopCar = (price,id,fid,name,nownum,type) => (dispatch)=>{
+  dispatch({type:'ShopCar',act:{price:price,id:id,fid:fid,name:name,nownum:nownum,type:type}});
+}
+export {getLocation,showPosition,showError,SearchLocation,handleShopCar}

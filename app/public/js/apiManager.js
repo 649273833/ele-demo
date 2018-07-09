@@ -24,5 +24,6 @@ export default {
   'tuijianlist':postApi('https:api.uu20.top/api/tuijianlist.php',1),
   'shoplist':postApi('https:api.uu20.top/api/shoplist.php',1),
   'shopitems':postApi('https:api.uu20.top/api/shopitems.php',1),
+  'settle':postApi('https:api.uu20.top/api/settle.php',1),
 
 }

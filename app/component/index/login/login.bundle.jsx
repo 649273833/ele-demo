@@ -32,7 +32,13 @@ class Index extends React.Component{
             sessionStorage['uphone'] = res.data.data.uphone;
             sessionStorage['id'] = res.data.data.id;
             sessionStorage['uheader'] = res.data.data.uheader;
-            window.location.href='#/Center'
+            let url = sessionStorage['url']
+            if(url){
+              window.location.href=url
+            }else {
+              window.location.href='#/Center'
+            }
+
             let token = 123123
             cookie.save(
               'token', token, {path: '/', maxAge:new Date().setDate(new Date().getDate()+30) }
@@ -60,7 +66,7 @@ class Index extends React.Component{
             onChange={this.handleUname}
 
           />
-          <span className='errAlert'></span>
+          <span className='errAlert'/>
         </div>
         <div className='items'>
           <input
@@ -68,7 +74,6 @@ class Index extends React.Component{
             value={upwd}
             placeholder='密码'
             onChange={this.handleUpwd}
-
           />
         </div>
         <div className='btn'>

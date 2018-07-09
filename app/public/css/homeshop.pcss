@@ -10,6 +10,7 @@ a{text-decoration: none;color: #333}
       display: grid;
       height: 100vh;
       overflow-y: scroll;
+      -webkit-overflow-scrolling : touch;
       grid-template-columns: 80px 1fr;
       position: relative;
       .left-list{
@@ -17,6 +18,7 @@ a{text-decoration: none;color: #333}
           height: 100vh;
           background-color: #f8f8f8;
           overflow-y: scroll;
+          -webkit-overflow-scrolling : touch;
           position: absolute;
           top: 0;
           left: 0;
@@ -51,6 +53,7 @@ a{text-decoration: none;color: #333}
       .right-list{
         height: 100vh;
         overflow-y: scroll;
+        -webkit-overflow-scrolling : touch;
         position: absolute;
         top: 0;
         left: 80px;
@@ -91,13 +94,13 @@ a{text-decoration: none;color: #333}
                 position: absolute;
                 right: 0;
                 bottom: 0;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                //display: flex;
+                //justify-content: space-between;
+                //align-items: center;
                 >span{
                   margin: 3px 6px;
                 }
-                .add-car,.subtract-car{
+                .add-car,.subtract-car,.nownum{
                   display: inline-block;
                   width: 22px;
                   height: 22px;
@@ -108,18 +111,25 @@ a{text-decoration: none;color: #333}
                   font-size: 20px;
                   font-weight: bold;
                   color: #fff;
+                  position: relative;
+                  z-index: 5;
                   background-color: #2395ff;
                   border: 1px solid #2395ff;
                 }
                 .subtract-car{
-                  display: none;
-                  right: 60px;
+                  //display: none;
+                  position: relative;
+                  z-index: 3;
+                  //right: 0px;
                   color: #2395ff;
                   line-height: 19px;
                   background-color: #fff;
                   border: 1px solid #2395ff;
+                  transform: translateX(36px);
+                  transition: all .4s linear;
                   &.active{
                     display: inline-block;
+                    transform: rotate(180deg) ;
                   }
                 }
                 .nownum{
@@ -128,6 +138,8 @@ a{text-decoration: none;color: #333}
                   font-size: 14px;
                   text-align: center;
                   line-height: 20px;
+                  background-color: transparent;
+                  border: none;
                   &.active{
                     display: inline-block;
                   }
@@ -183,6 +195,7 @@ a{text-decoration: none;color: #333}
             }
             .entity-list{
               overflow: scroll;
+              -webkit-overflow-scrolling : touch;
               width: 100%;
               max-height: calc(50vh - 40px);
               li.entity-row{

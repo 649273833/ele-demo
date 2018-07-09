@@ -8,12 +8,17 @@ import {Provider,connect} from 'react-redux';
 import store from '../../common/store'
 import ShopCar from './shopcar'
 import {accAdd,Subtr,accMul,accDiv} from '../../../../public/js/utils';
-
+import {handleShopCar} from '../../common/action'
 class ShopFoodList extends React.Component{
-  state = {
-    list:'',
-    data:''
-  }
+ constructor(props){
+   super(props);
+   this.state = {
+     list:'',
+     data:'',
+     move:0,
+   }
+   this.Refs=''
+ }
   componentDidMount(){
     let id = urlParam('id',window.location.href)
     axios.get(ApiManager.shoplist,{
@@ -24,32 +29,49 @@ class ShopFoodList extends React.Component{
       .then(res=>{
         if(res.data.code>0){
           let list = res.data.data.shoplist
-          console.log(list)
-          this.setState({list})
+          this.props.dispatch({type:'List',list:list})
         }
       })
   }
 
-  handleShopCar = (price,id,fid,type) =>{
-    this.props.dispatch({type:'ShopCar',act:{price:price,types:type}})
-    let list = this.state.list
-    let children = list.find(data=> data.id === id).children
-    if(type === 'Addcar'){
-      list.find(data=> data.id === id).listnownum += 1
-      children.find(data=> data.fid === fid).nownum += 1
-    }else if(type === 'Subtractcar'){
-      list.find(data=> data.id === id).listnownum -= 1
-      children.find(data=> data.fid === fid).nownum -= 1
-    }
-    this.setState({list})
+  // handleShopCar = (price,id,fid,name,nownum,type) =>{
+  //   this.props.dispatch({type:'ShopCar',act:{price:price,types:type}})
+  //   let list = this.state.list
+  //   let children = list.find(data=> data.id === id).children
+  //   if(type === 'Addcar'){
+  //     list.find(data=> data.id === id).listnownum += 1
+  //     children.find(data=> data.fid === fid).nownum += 1
+  //     this.props.dispatch({type:'Settle',settle:{id:id,fid:fid,name:name,price:price,nownum:nownum + 1}})
+  //   }else if(type === 'Subtractcar'){
+  //     list.find(data=> data.id === id).listnownum -= 1
+  //     children.find(data=> data.fid === fid).nownum -= 1
+  //     this.props.dispatch({type:'Settle',settle:{id:id,fid:fid,name:name,price:price,nownum:nownum - 1}})
+  //   }
+  //   this.setState({list})
+  // }
+  handleStart = (e) =>{
+    this.startY = e.touches[0].clientY
+  }
+  handleMove = (e) =>{
+    this.endY = e.touches[0].clientY
+    this.setState({move:this.endY - this.startY})
+  }
+  handleEnd = (e) =>{
+    this.setState({move:0})
   }
   render(){
-    let {list} = this.state;
-    let {shopprice} = this.props.storeState;
+    let {move,startPrice} = this.state;
+
+    let {list,shopprice} = this.props.storeState;
     return(
       <div className='shop-food-list'>
         <div className='left-list'>
-          <ul>
+          <ul
+            onTouchStart={this.handleStart}
+            onTouchMove={this.handleMove}
+            onTouchEnd={this.handleEnd}
+            style={{transform : `translateY(${move}px)`}}
+          >
             {
               list && list.map((data)=>
                 <li onClick={()=>MyAnchor(data.anchor)} key={data.id}>
@@ -82,7 +104,7 @@ class ShopFoodList extends React.Component{
                         <img src={require('../../../../public/img/5c604129ba9ef68c94e6be1179e09jpeg.png')} alt=""/>
                       </span>
                       <div className='food-intr'>
-                        <h3>{child.foodname}</h3>
+                        <h3>{child.name}</h3>
                         <p>热卖产品</p>
                         <p>
                           <span>月售{child.pricenum}份</span>
@@ -104,24 +126,35 @@ class ShopFoodList extends React.Component{
                           <div className='price-box'>
                             <span
                               className={child.nownum ? 'subtract-car active' : 'subtract-car'}
-                              onClick={(price,id,fid,type)=>this.handleShopCar(
-                                child.discount ? accDiv(accMul(child.discountnum,child.price),100) : child.price,
-                                data.id,
-                                child.fid,
-                                'Subtractcar'
-                              )}>-</span>
+                              onClick={
+                                child.nownum > 0 ?
+                                  (price,id,fid,name,type)=>this.props.dispatch(handleShopCar(
+                                    child.discount ? accDiv(accMul(child.discountnum,child.price),100) : child.price,
+                                    data.id,
+                                    child.fid,
+                                    child.name,
+                                    child.nownum,
+                                    'Subtractcar'
+                                  ))
+                                  :
+                                  null
+                              }
+                            >-</span>
                             <span
                               className={child.nownum ? 'nownum active' : 'nownum'}
                             >{child.nownum}
                             </span>
                             <span
                               className='add-car'
-                              onClick={(price,id,fid,type)=>this.handleShopCar(
+                              ref={ref=>this.Refs=ref}
+                              onClick={(price,id,fid,name,type)=>this.props.dispatch(handleShopCar(
                                 child.discount ? accDiv(accMul(child.discountnum,child.price),100) : child.price,
                                 data.id,
                                 child.fid,
+                                child.name,
+                                child.nownum,
                                 'Addcar'
-                              )}>+</span>
+                              ))}>+</span>
                           </div>
                         </div>
                       </div>
