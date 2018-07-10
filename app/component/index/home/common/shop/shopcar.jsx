@@ -1,10 +1,10 @@
 import React from 'react';
 import {Provider,connect} from 'react-redux';
-import store from '../../common/store'
+import store from '../../../common/store'
 import axios from 'axios'
-import ApiManager from '../../../../public/js/apiManager'
-import { accDiv, accMul, Subtr } from '../../../../public/js/utils';
-import {handleShopCar} from '../../common/action'
+import ApiManager from '../../../../../public/js/apiManager'
+import { accDiv, accMul, Subtr } from '../../../../../public/js/utils';
+import {handleShopCar} from '../../../common/action'
 let qs = require('qs');
 class Index extends React.Component{
   state = {
@@ -19,22 +19,20 @@ class Index extends React.Component{
         this.setState({startPrice})
       })
   }
-  handleSettle = (settle,shopprice) =>{
+  handleShopcarlist = (shopcarlist,shopprice) =>{
     let isLogin = sessionStorage['isLogin'];
     if(isLogin){
       let instance = axios.create({
         headers:{'content-type': 'application/x-www-form-urlencoded'}
       });
       let data = qs.stringify({
-        'settle':settle,
+        'shopcarlist':shopcarlist,
         'shopprice':shopprice
       });
-      instance.post(ApiManager.settle,data)
+      instance.post(ApiManager.shopcarlist,data)
         .then(res=>{
           if(res.data.code > 0){
-            console.log('订单列表：',settle);
-            console.log('费用：',shopprice);
-            console.log(res.data.data.result)
+            window.location.href='#/Home/Checkout'
           }
         })
         .catch(res=>{
@@ -46,27 +44,27 @@ class Index extends React.Component{
   }
   render(){
     let {isShow,startPrice} = this.state;
-    let {settle,shopprice,shopnum} = this.props.storeState;
-    settle = settle.filter(data=>data.nownum !== 0);
-    let Settle =  <span onClick={(Settle,Shopprice)=>this.handleSettle(settle,shopprice)}>去结算</span>
+    let {shopcarlist,shopprice,shopnum} = this.props.storeState;
+    shopcarlist = shopcarlist.filter(data=>data.nownum !== 0);
+    let Shopcarlist =  <span onClick={(Shopcarlist,Shopprice)=>this.handleShopcarlist(shopcarlist,shopprice)}>去结算</span>
     return(
       <div className='car'>
         <p className='activity'>满30减10元，满40减15元，满60减30元</p>
         {
-          (shopprice > 0) && settle && isShow ?
+          (shopprice > 0) && shopcarlist && isShow ?
             <div className='car-modal'>
               <div className='modal-bg' onClick={()=>this.setState({isShow:false})}/>
               <div className='box'>
                 <div className='carview-header'>
                   <span>已选商品</span>
                   <span>
-                <img src={require('../../../../public/img/clear-car.png')} alt=""/>
+                <img src={require('../../../../../public/img/clear-car.png')} alt=""/>
                 清空
               </span>
                 </div>
                 <ul className='entity-list'>
                   {
-                    settle && settle.map((data,i) =>
+                    shopcarlist && shopcarlist.map((data,i) =>
                       <li className='entity-row' key={i}>
                         <div className='entity-row-title'>
                         <span>{data.name}</span>
@@ -124,7 +122,7 @@ class Index extends React.Component{
               <p>另需配送费4元</p>
             </div>
             <div className={shopprice > 0 ? 'min-price active' : 'min-price'}>
-              {startPrice &&  shopprice > 0 && shopprice < startPrice ? `还差${Subtr(startPrice,shopprice)}起送` : (startPrice && shopprice <= 0 ? `￥${startPrice}起送` : Settle)}
+              {startPrice &&  shopprice > 0 && shopprice < startPrice ? `还差${Subtr(startPrice,shopprice)}起送` : (startPrice && shopprice <= 0 ? `￥${startPrice}起送` : Shopcarlist)}
             </div>
           </div>
         </div>

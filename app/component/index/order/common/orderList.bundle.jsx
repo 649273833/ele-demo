@@ -4,7 +4,7 @@ import Footer from '../../common/Footer';
 import '../../../../public/css/order.pcss'
 import axios from 'axios/index';
 import ApiManager from '../../../../public/js/apiManager'
-import {AlertLogin,LoadingText,Loaderr,CenterHeader} from '../../common/Modal'
+import {AlertLogin,LoadingText,Loaderr,CenterHeader} from '../../common/Module'
 
 class App extends React.Component{
   constructor(){

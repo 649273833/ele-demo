@@ -3,7 +3,7 @@ import axios from 'axios'
 import '../../../../public/css/userinfo.pcss'
 import ApiManager from '../../../../public/js/apiManager'
 import cookie from 'react-cookie'
-import {Modal,CenterHeader} from '../../common/Modal'
+import {Module,CenterHeader} from '../../common/Module'
 let qs = require('qs');
 
 class Index extends React.Component{
@@ -162,7 +162,7 @@ class Index extends React.Component{
     let {unickname,uphone,isLogin,uheader} = this.state;
     return(
       <div className='userInfo'>
-        {!isLogin ? <Modal/> : ''}
+        {!isLogin ? <Module/> : ''}
         <CenterHeader title='账户信息'/>
         <div className='items uheader'>
           <b>头像</b>

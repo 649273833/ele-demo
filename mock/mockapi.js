@@ -110,7 +110,6 @@ Mock.mock(/\/shoplist.mock/,{
         'praise|0-100':92,
         'discount|':true,
         'price|0-50':25,
-        'test':this.discount,
         'discountnum|0-100':80,
         'nownum':0
       }]
@@ -119,7 +118,7 @@ Mock.mock(/\/shoplist.mock/,{
   'message':'获取成功！',
   'systemDate':new Date().getTime()
 })
-Mock.mock(/\/settle.mock/,{
+Mock.mock(/\/shopcarlist.mock/,{
   'code':1,
   data:{
     'result':'好了,外卖已经点好了，安心学习吧！',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {CenterHeader} from '../../common/Modal';
+import {CenterHeader} from '../../common/Module';
 import store from '../../common/store'
 import {Provider,connect} from 'react-redux';
 import axios from 'axios';

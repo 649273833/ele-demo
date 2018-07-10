@@ -2,8 +2,8 @@ import React from 'react'
 import {NavLink,HashRouter,Redirect,Route} from 'react-router-dom'
 import ShopFoodList from './shopfoodlist.bundle';
 import Evaluation from './evaluation.bundle';
-import Shop from './shop.bundle';
-import { BundleFun } from '../../common/Bundle';
+import Shopintr from './shopintr.bundle';
+import { BundleFun } from '../../../common/Bundle';
 class ShopRouter extends React.Component{
   state = {
     navbar:false
@@ -51,7 +51,7 @@ class ShopRouter extends React.Component{
                 />
                 <Route path='/Home/FoodDetail/ShopFoodList' component={() =>BundleFun(ShopFoodList)}/>
                 <Route path='/Home/FoodDetail/Evaluation' component={() =>BundleFun(Evaluation)}/>
-                <Route path='/Home/FoodDetail/Shop' component={() =>BundleFun(Shop)}/>
+                <Route path='/Home/FoodDetail/Shopintr' component={() =>BundleFun(Shopintr)}/>
               </div>
             </HashRouter>
             : null

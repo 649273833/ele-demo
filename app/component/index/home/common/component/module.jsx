@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 const LoactionErr = () =>
   <div className='locationerr'>
-    <img src={require('../../../../public/img/64f199059800f254c47e16495442bgif.gif')} alt=""/>
+    <img src={require('../../../../../public/img/64f199059800f254c47e16495442bgif.gif')} alt=""/>
     <p>输入地址后才能订餐哦！</p><br/>
     <Link to='/Home/SearchLocation'>
       手动选择地址
@@ -65,7 +65,7 @@ class MoreModal extends React.Component{
           <h3 className='more-modal-title'>优惠活动</h3>
           <img
             className='more-moadl-close'
-            src={require('../../../../public/img/search-close-gray.png')}
+            src={require('../../../../../public/img/search-close-gray.png')}
             alt=""
             onClick={()=>handleMoreModal(moreModal ? false : true)}
           />

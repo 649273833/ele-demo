@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios'
-import ApiManager from '../../../../public/js/apiManager'
+import ApiManager from '../../../../../public/js/apiManager'
 import ReactPullLoad,{STATS} from 'react-pullload'
-import {LoadingText} from '../../common/Modal'
+import {LoadingText} from '../../../common/Module'
 import {Link} from 'react-router-dom'
 class Index extends React.Component{
   state ={
@@ -110,7 +110,7 @@ class Index extends React.Component{
 
                 <div className='list-items' key={val.id}>
                   <div className='food-img'>
-                    <img src={require('../../../../public/img/73972a0237f055e8858c6c6e80730jpeg.png')} alt=""/>
+                    <img src={require('../../../../../public/img/73972a0237f055e8858c6c6e80730jpeg.png')} alt=""/>
                   </div>
                   <Link
                     to={{
@@ -128,14 +128,19 @@ class Index extends React.Component{
                       <div className='star'>
                         <div className='star-info'>
                           <div className='star-n'>
-                            <img src={require('../../../../public/img/star-food.png')} alt=""/>
+                            <img src={require('../../../../../public/img/star-food.png')} alt=""/>
                             <span style={{left:(val.star * 20) + '%'}}></span>
                           </div>
                           <span>{val.star}</span>
                           <span>月售{val.sellnum}单</span>
                         </div>
                         <div className='specially'>
-                          <span>{val.specially ? '蜂鸟专送' : ''}</span>
+                          {
+                            val.specially ?
+                              <span>蜂鸟专送</span>
+                              :
+                              null
+                          }
                         </div>
                       </div>
                       <div className='money-limit'>
@@ -146,7 +151,7 @@ class Index extends React.Component{
                   </Link>
                   <div className='activity-wrap'>
                     <p className='source-tag'>
-                      <img src={require('../../../../public/img/24c767ffa7fd296d3e2d6f01798c6png.png')} alt=""/>
+                      <img src={require('../../../../../public/img/24c767ffa7fd296d3e2d6f01798c6png.png')} alt=""/>
                       <span>口碑人气好店</span>
                     </p>
                     <div className='act-row'>

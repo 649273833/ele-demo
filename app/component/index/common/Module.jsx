@@ -5,7 +5,7 @@ import drop from '../../../public/img/drop.png'
 import finished from '../../../public/img/finished.png'
 import loading from '../../../public/img/circle-dot-preloader.svg'
 
-const Modal = () =>
+const Module = () =>
   <div className='modal'>
     <div className='modal-items'>
       <h3>未登录</h3>
@@ -51,7 +51,9 @@ class CenterHeader extends React.Component{
     url : ''
   };
   setUrl = () =>{
-    let historyUrl = sessionStorage['url'];
+    // let historyUrl = sessionStorage['url'];
+    let historyUrl = document.referrer
+    console.log(historyUrl)
     if(historyUrl){
       this.setState({url:historyUrl});
     }else {
@@ -61,11 +63,17 @@ class CenterHeader extends React.Component{
   componentDidMount (){
     this.setUrl();
   }
+  handleClickGoBack = () =>{
+    window.history.go(-1)
+  }
   render(){
     let urlstatus = this.props.url;
     return(
       <div className='header clear'>
-        <a href={urlstatus === 1 ? 'javascript:voild(0);' : this.state.url}>
+        {/*<a href={urlstatus === 1 ? 'javascript:voild(0);' : this.state.url}>*/}
+          {/*<img src={require(urlstatus === 1 ? '../../../public/img/alert-msg.png' : '../../../public/img/Arrow-left.png')} alt=""/>*/}
+        {/*</a>*/}
+        <a href="javascript:;" onClick={urlstatus === 1 ? null : this.handleClickGoBack}>
           <img src={require(urlstatus === 1 ? '../../../public/img/alert-msg.png' : '../../../public/img/Arrow-left.png')} alt=""/>
         </a>
         <p>{this.props.title}</p>
@@ -73,4 +81,4 @@ class CenterHeader extends React.Component{
     )
   }
 }
-export  {Modal,LoadingText,Loaderr,CenterHeader,AlertLogin};
+export  {Module,LoadingText,Loaderr,CenterHeader,AlertLogin};

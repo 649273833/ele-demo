@@ -1,14 +1,14 @@
 import React from 'react';
-import '../../../../public/css/homeshop.pcss'
-import {urlParam} from '../../../../public/js/utils';
+import '../../../../../public/css/homeshop.pcss'
+import {urlParam} from '../../../../../public/js/utils';
 import axios from 'axios'
-import ApiManager from '../../../../public/js/apiManager'
-import {MyAnchor} from '../../../../public/js/utils'
+import ApiManager from '../../../../../public/js/apiManager'
+import {MyAnchor} from '../../../../../public/js/utils'
 import {Provider,connect} from 'react-redux';
-import store from '../../common/store'
+import store from '../../../common/store'
 import ShopCar from './shopcar'
-import {accAdd,Subtr,accMul,accDiv} from '../../../../public/js/utils';
-import {handleShopCar} from '../../common/action'
+import {accAdd,Subtr,accMul,accDiv} from '../../../../../public/js/utils';
+import {handleShopCar} from '../../../common/action'
 class ShopFoodList extends React.Component{
  constructor(props){
    super(props);
@@ -33,22 +33,6 @@ class ShopFoodList extends React.Component{
         }
       })
   }
-
-  // handleShopCar = (price,id,fid,name,nownum,type) =>{
-  //   this.props.dispatch({type:'ShopCar',act:{price:price,types:type}})
-  //   let list = this.state.list
-  //   let children = list.find(data=> data.id === id).children
-  //   if(type === 'Addcar'){
-  //     list.find(data=> data.id === id).listnownum += 1
-  //     children.find(data=> data.fid === fid).nownum += 1
-  //     this.props.dispatch({type:'Settle',settle:{id:id,fid:fid,name:name,price:price,nownum:nownum + 1}})
-  //   }else if(type === 'Subtractcar'){
-  //     list.find(data=> data.id === id).listnownum -= 1
-  //     children.find(data=> data.fid === fid).nownum -= 1
-  //     this.props.dispatch({type:'Settle',settle:{id:id,fid:fid,name:name,price:price,nownum:nownum - 1}})
-  //   }
-  //   this.setState({list})
-  // }
   handleStart = (e) =>{
     this.startY = e.touches[0].clientY
   }
@@ -60,9 +44,8 @@ class ShopFoodList extends React.Component{
     this.setState({move:0})
   }
   render(){
-    let {move,startPrice} = this.state;
-
-    let {list,shopprice} = this.props.storeState;
+    let {move} = this.state;
+    let {list,shopcarlist} = this.props.storeState;
     return(
       <div className='shop-food-list'>
         <div className='left-list'>
@@ -101,7 +84,7 @@ class ShopFoodList extends React.Component{
                   data.children && data.children.map((child)=>
                     <div className='items'  key={child.fid}>
                       <span className='food-img'>
-                        <img src={require('../../../../public/img/5c604129ba9ef68c94e6be1179e09jpeg.png')} alt=""/>
+                        <img src={require('../../../../../public/img/5c604129ba9ef68c94e6be1179e09jpeg.png')} alt=""/>
                       </span>
                       <div className='food-intr'>
                         <h3>{child.name}</h3>

@@ -72,7 +72,6 @@ let showError = (error) =>(dispatch)=>{
   }
 };
 
-
 let SearchLocation = (latlon) => (dispatch)=>{
   jsonp('https://api.map.baidu.com/geocoder/v2/?ak=adyHtftfE9CuhY3pqKf7EvcL1S21ZGkQ&callback=renderReverse&location='+latlon+'&output=json&pois=5')
     .then(res=>res.json())
@@ -91,8 +90,8 @@ let SearchLocation = (latlon) => (dispatch)=>{
     })
 }
 
-
 let  handleShopCar = (price,id,fid,name,nownum,type) => (dispatch)=>{
   dispatch({type:'ShopCar',act:{price:price,id:id,fid:fid,name:name,nownum:nownum,type:type}});
 }
+
 export {getLocation,showPosition,showError,SearchLocation,handleShopCar}

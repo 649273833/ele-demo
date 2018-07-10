@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ApiManager from '../../../../public/js/apiManager'
 import {Link} from 'react-router-dom';
-import {Modal,Loaderr,CenterHeader} from '../../common/Modal'
+import {Module,Loaderr,CenterHeader} from '../../common/Module'
 class Index extends React.Component{
   state = {
     data:'',
@@ -54,7 +54,7 @@ class Index extends React.Component{
                 <img className='edit' src={require('../../../../public/img/edit-gray.png')} alt=""/>
               </div>
             ): (
-              loaderr && isLogin ? <Loaderr/> : !isLogin ? <Modal/> : !data ? <div style={{textAlign:'center',paddingTop:100}}>没有数据</div> : ''
+              loaderr && isLogin ? <Loaderr/> : !isLogin ? <Module/> : !data ? <div style={{textAlign:'center',paddingTop:100}}>没有数据</div> : ''
             )
           }
         </div>

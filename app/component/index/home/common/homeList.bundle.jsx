@@ -1,14 +1,14 @@
 import React from 'react';
 import Footer from '../../common/Footer';
-import {LoactionErr} from './module';
+import {LoactionErr} from './component/module';
 import {Link} from 'react-router-dom'
 import '../../../../public/css/homeModule.pcss';
 import { getLocation, showPosition } from '../../common/action';
 import store from '../../common/store'
 import {Provider,connect} from 'react-redux';
-import Swipes from './Swipes';
-import Banner from './banner';
-import FoodList from './FoodList'
+import Swipes from './component/Swipes';
+import Banner from './component/banner';
+import FoodList from './component/FoodList'
 class Index extends React.Component{
   state = {
     locations :''

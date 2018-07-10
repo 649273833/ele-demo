@@ -1,10 +1,10 @@
 import React from 'react';
 import {urlParam} from '../../../../public/js/utils';
-import {ShopModal,MoreModal} from './module'
+import {ShopModal,MoreModal} from './component/module'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import ApiManager from '../../../../public/js/apiManager'
-import ShopRouter from './shoprouter'
+import ShopRouter from './shop/shoprouter'
 
 
 class Index extends React.Component{
@@ -33,13 +33,16 @@ class Index extends React.Component{
   handleMoreModal = (moreModal) =>{
     this.setState({moreModal})
   }
+  handleClickGoBack = () =>{
+    window.history.go(-1)
+  }
   render(){
     let {modal,data,moreModal} =  this.state;
     return(
       <div className='food-detail'>
         <div className='detail-header'>
           <div className='banner-merchants'>
-            <Link className='detail-header-back' to="/Home"></Link>
+            <a className='detail-header-back'  href="javascript:;" onClick={this.handleClickGoBack}/>
           </div>
         </div>
         <div className='detail-warp'>
