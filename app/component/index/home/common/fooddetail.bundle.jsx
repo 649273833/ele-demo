@@ -42,7 +42,7 @@ class Index extends React.Component{
       <div className='food-detail'>
         <div className='detail-header'>
           <div className='banner-merchants'>
-            <a className='detail-header-back'  href="javascript:;" onClick={this.handleClickGoBack}/>
+            <Link className='detail-header-back'  to='/Home'/>
           </div>
         </div>
         <div className='detail-warp'>
@@ -69,7 +69,7 @@ class Index extends React.Component{
                   <p className='info-detail'>
                     <span>{data && data.star}</span>
                     <span>月售{data && data.sellnum}单</span>
-                    <span>蜂鸟专送约{data && data.time > 60 ? (1 + '小时' + (data && data.time -  60)  + '分钟' ) : (data.time + '分钟')}</span>
+                    <span>{data && data.specially ? '蜂鸟专送' : '商家配送'}约{data && data.time > 60 ? (1 + '小时' + (data && data.time -  60)  + '分钟' ) : (data.time + '分钟')}</span>
                     <span>距离{data && data.distance}km</span>
                   </p>
                   <p className='shop-alert'>欢迎光临，用餐高峰期请提前下单，谢谢。</p>

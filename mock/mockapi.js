@@ -98,6 +98,10 @@ Mock.mock(/\/shoplist.mock/,{
   'code':1,
   data:{
     'startPrice|0-50':10,
+    'specially|':true,
+    'prefer|0-15':10,
+    'speciallyPrice|0-10':2,
+    'name':Mock.Random.ctitle(4,8),
     'shoplist|5-20':[{
       'id|+1':1,
       'listnownum':0,

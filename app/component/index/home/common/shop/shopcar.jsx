@@ -5,48 +5,47 @@ import axios from 'axios'
 import ApiManager from '../../../../../public/js/apiManager'
 import { accDiv, accMul, Subtr } from '../../../../../public/js/utils';
 import {handleShopCar} from '../../../common/action'
+import {urlParam} from '../../../../../public/js/utils';
+
 let qs = require('qs');
 class Index extends React.Component{
   state = {
     isShow : false,
     startPrice : 0,
-
+    shopinfo:[]
   };
   componentDidMount(){
-    axios.get(ApiManager.shoplist)
+    let id = urlParam('id',window.location.href)
+    axios.get(ApiManager.shoplist,{
+      params:{id:id}
+    })
       .then(res=>{
         let startPrice = res.data.data.startPrice;
-        this.setState({startPrice})
+        let specially = res.data.data.specially
+        let name = res.data.data.name
+        let prefer = res.data.data.prefer
+        let speciallyPrice = res.data.data.speciallyPrice
+        let shopinfo =[]
+        shopinfo.push({specially:specially,name:name,prefer:prefer,speciallyPrice:speciallyPrice})
+        this.setState({startPrice,shopinfo})
       })
   }
-  handleShopcarlist = (shopcarlist,shopprice) =>{
+  handleShopcarlist = (shopcarlist,shopprice,shopinfo) =>{
     let isLogin = sessionStorage['isLogin'];
     if(isLogin){
-      let instance = axios.create({
-        headers:{'content-type': 'application/x-www-form-urlencoded'}
-      });
-      let data = qs.stringify({
-        'shopcarlist':shopcarlist,
-        'shopprice':shopprice
-      });
-      instance.post(ApiManager.shopcarlist,data)
-        .then(res=>{
-          if(res.data.code > 0){
-            window.location.href='#/Home/Checkout'
-          }
-        })
-        .catch(res=>{
-          console.log('网络错误，请稍后重试！')
-        })
+      let orderInfo=[]
+      orderInfo.push({shopcarlist:shopcarlist,shopprice:shopprice,shopinfo:shopinfo})
+      this.props.dispatch({type:'orderInfo',orderInfo:orderInfo})
+      window.location.href='#/Home/Checkout'
     }else {
       window.location.href='#/Center/LoginIndex'
     }
   }
   render(){
-    let {isShow,startPrice} = this.state;
+    let {isShow,startPrice,shopinfo} = this.state;
     let {shopcarlist,shopprice,shopnum} = this.props.storeState;
     shopcarlist = shopcarlist.filter(data=>data.nownum !== 0);
-    let Shopcarlist =  <span onClick={(Shopcarlist,Shopprice)=>this.handleShopcarlist(shopcarlist,shopprice)}>去结算</span>
+    let Shopcarlist =  <span onClick={(Shopcarlist,Shopprice,Shopinfo)=>this.handleShopcarlist(shopcarlist,shopprice,shopinfo)}>去结算</span>
     return(
       <div className='car'>
         <p className='activity'>满30减10元，满40减15元，满60减30元</p>

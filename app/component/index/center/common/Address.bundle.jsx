@@ -2,14 +2,20 @@ import React from 'react';
 import axios from 'axios';
 import ApiManager from '../../../../public/js/apiManager'
 import {Link} from 'react-router-dom';
+import {Provider,connect} from 'react-redux';
+import store from '../../common/store'
+import {urlParam} from '../../../../public/js/utils';
 import {Module,Loaderr,CenterHeader} from '../../common/Module'
 class Index extends React.Component{
   state = {
     data:'',
     isLogin:false,
     loaderr:false,
+    pay:0
   }
   componentDidMount(){
+    let pay = urlParam('pay',window.location.href)
+    this.setState({pay})
     this.handleBaseInfo()
   }
   handleBaseInfo = () =>{
@@ -30,15 +36,27 @@ class Index extends React.Component{
         })
     }
   }
+  handlePay = (data) =>{
+    let pay = this.state.pay
+    if(pay){
+      this.props.dispatch({type:'changeAddr',addr:data})
+      window.history.go(-1)
+    }
+
+  }
   render(){
     let {data,isLogin,loaderr} = this.state;
     return(
       <div className='address'>
         <CenterHeader title='我的地址'/>
-        <div style={{paddingBottom:100}}>
+        <div style={{paddingBottom:50}}>
           {
             (data && isLogin) ? data.map((data)=>
-              <div key={data.id} className='items clear'>
+              <div
+                key={data.id}
+                className='items clear'
+                onClick={(val)=>this.handlePay(data)}
+              >
                 <div className='title'>
                   <p>
                     <span className='name'>{data.name}</span>
@@ -67,4 +85,11 @@ class Index extends React.Component{
   }
 }
 
-export default Index;
+const mapStateToProps = state =>({storeState:state});
+const Main = connect (
+  mapStateToProps
+)(Index)
+export default ()=>
+  <Provider store={store}>
+    <Main/>
+  </Provider>

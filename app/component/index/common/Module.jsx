@@ -53,7 +53,6 @@ class CenterHeader extends React.Component{
   setUrl = () =>{
     // let historyUrl = sessionStorage['url'];
     let historyUrl = document.referrer
-    console.log(historyUrl)
     if(historyUrl){
       this.setState({url:historyUrl});
     }else {
