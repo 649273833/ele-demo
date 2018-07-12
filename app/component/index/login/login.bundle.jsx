@@ -8,7 +8,8 @@ import ApiManager from '../../../public/js/apiManager'
 class Index extends React.Component{
   state = {
     uname:'',
-    upwd:''
+    upwd:'',
+    loading:false
   };
   handleUname = (e) =>{
     this.setState({uname:e.target.value})
@@ -17,6 +18,7 @@ class Index extends React.Component{
     this.setState({upwd:e.target.value})
   };
   handleBtn = () =>{
+    this.setState({loading:true})
     let {uname,upwd} = this.state;
     if(uname && upwd){
       axios.get(ApiManager.elelogin,{
@@ -34,11 +36,11 @@ class Index extends React.Component{
             sessionStorage['uheader'] = res.data.data.uheader;
             let url = sessionStorage['url']
             if(url){
+              this.setState({loading:false})
               window.location.href=url
             }else {
               window.location.href='#/Center'
             }
-
             let token = 123123
             cookie.save(
               'token', token, {path: '/', maxAge:new Date().setDate(new Date().getDate()+30) }
@@ -55,7 +57,7 @@ class Index extends React.Component{
     }
   }
   render(){
-    let {uname,upwd} = this.state;
+    let {uname,upwd,loading} = this.state;
     return(
       <div className='login'>
         <div className='items'>
@@ -82,10 +84,15 @@ class Index extends React.Component{
             disabled={uname && upwd ? false : true}
             onClick={this.handleBtn}
           >
-            登录
+            {
+              loading ?
+                <span><img src={require('../../../public/img/circle-dot-preloader.svg')} alt=""/>正在登陆</span>
+                :'登录'
+            }
           </button>
         </div>
         <p className='aboutme'>关于我们</p>
+
       </div>
     )
   }

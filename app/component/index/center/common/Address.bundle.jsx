@@ -40,6 +40,7 @@ class Index extends React.Component{
     let pay = this.state.pay
     if(pay){
       this.props.dispatch({type:'changeAddr',addr:data})
+      sessionStorage['changeAddr'] = JSON.stringify(data)
       window.history.go(-1)
     }
 

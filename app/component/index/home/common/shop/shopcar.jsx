@@ -36,6 +36,7 @@ class Index extends React.Component{
       let orderInfo=[]
       orderInfo.push({shopcarlist:shopcarlist,shopprice:shopprice,shopinfo:shopinfo})
       this.props.dispatch({type:'orderInfo',orderInfo:orderInfo})
+      sessionStorage['orderInfo'] = JSON.stringify(orderInfo);
       window.location.href='#/Home/Checkout'
     }else {
       window.location.href='#/Center/LoginIndex'
@@ -44,6 +45,16 @@ class Index extends React.Component{
   render(){
     let {isShow,startPrice,shopinfo} = this.state;
     let {shopcarlist,shopprice,shopnum} = this.props.storeState;
+
+    if(sessionStorage['cshopcarlist']){
+      shopcarlist = JSON.parse(sessionStorage['cshopcarlist'])
+    }
+    if(sessionStorage['cshopprice']){
+      shopprice = sessionStorage['cshopprice']
+    }
+    if(sessionStorage['cshopnum']){
+      shopnum = sessionStorage['cshopnum']
+    }
     shopcarlist = shopcarlist.filter(data=>data.nownum !== 0);
     let Shopcarlist =  <span onClick={(Shopcarlist,Shopprice,Shopinfo)=>this.handleShopcarlist(shopcarlist,shopprice,shopinfo)}>去结算</span>
     return(

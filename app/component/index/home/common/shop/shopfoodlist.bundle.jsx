@@ -20,6 +20,7 @@ class ShopFoodList extends React.Component{
    this.Refs=''
  }
   componentDidMount(){
+    sessionStorage['url']=window.location.href
     let id = urlParam('id',window.location.href)
     axios.get(ApiManager.shoplist,{
       params:{

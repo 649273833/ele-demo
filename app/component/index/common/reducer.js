@@ -20,6 +20,9 @@ export default (state = {
   switch (action.type){
     case 'List':
       list = action.list
+      if(sessionStorage['changelist']){
+        list = JSON.parse(sessionStorage['changelist'])
+      }
       return {list,location,locationList,shopprice,shopnum,shopcarlist,changeAddr,orderInfo}
     case 'setLocation':
       location = action.location;
@@ -31,14 +34,33 @@ export default (state = {
       let {price,id,fid,name,nownum,type} = action.act
       let children = list.find(data=> data.id === id).children;
       if(type === 'Addcar'){
-        shopprice = accAdd(shopprice,action.act.price)
+
+        if(sessionStorage['cshopprice']){
+          shopprice = accAdd(sessionStorage['cshopprice'],action.act.price)
+          sessionStorage['cshopprice']=shopprice;
+        }else {
+          shopprice = accAdd(shopprice,action.act.price)
+          sessionStorage['cshopprice']=shopprice;
+        }
         // shopprice = accDiv(Math.ceil(accMul(shopprice,100)),100)
         // console.log(shopprice,action.act.price)
+
+
         shopnum = shopnum + 1
 
 
         list.find(data=> data.id === id).listnownum += 1;
         children.find(data=> data.fid === fid).nownum += 1;
+        if(sessionStorage['cshopnum']){
+          shopnum = accAdd( sessionStorage['cshopnum'],1)
+        }
+        sessionStorage['cshopnum']=shopnum;
+
+        if(sessionStorage['cshopcarlist']){
+          let oldshopcarlist = JSON.parse(sessionStorage['cshopcarlist'])
+          shopcarlist = oldshopcarlist
+        }
+
         if(shopcarlist.find(data=>data.id === id && data.fid === fid)){
           shopcarlist.find(data=>data.id === id && data.fid === fid).nownum = nownum + 1
 
@@ -50,7 +72,14 @@ export default (state = {
 
 
       }else if(type === 'Subtractcar'){
-        shopprice = Subtr(shopprice,action.act.price)
+
+        if(sessionStorage['cshopprice']){
+          shopprice = Subtr(sessionStorage['cshopprice'],action.act.price)
+          sessionStorage['cshopprice']=shopprice;
+        }else {
+          shopprice = Subtr(shopprice,action.act.price)
+          sessionStorage['cshopprice']=shopprice;
+        }
         // shopprice = accDiv(Math.ceil(accMul(shopprice,100)),100)
         // console.log(shopprice,action.act.price)
         shopnum = shopnum - 1
@@ -58,6 +87,14 @@ export default (state = {
 
         list.find(data=> data.id === id).listnownum -= 1;
         children.find(data=> data.fid === fid).nownum -= 1;
+        if(sessionStorage['cshopnum']){
+          shopnum = Subtr( sessionStorage['cshopnum'],1)
+        }
+        sessionStorage['cshopnum']=shopnum;
+        if(sessionStorage['cshopcarlist']){
+          let oldshopcarlist = JSON.parse(sessionStorage['cshopcarlist'])
+          shopcarlist = oldshopcarlist
+        }
         if(shopcarlist.find(data=>data.id === id && data.fid === fid)){
           shopcarlist.find(data=>data.id === id && data.fid === fid).nownum = nownum - 1
 
@@ -67,12 +104,27 @@ export default (state = {
         }
 
       }
+
+      sessionStorage['changelist']=JSON.stringify(list);
+
+
+      sessionStorage['cshopcarlist']=JSON.stringify(shopcarlist);
+
       return {list,location,locationList,shopprice,shopnum,shopcarlist,changeAddr,orderInfo}
     case 'changeAddr':
-      changeAddr = action.addr
+      changeAddr = action.addr ? action.addr : null
+      if(action.addr){
+        changeAddr = action.addr
+        sessionStorage['changeAddr'] = changeAddr
+      }else if(sessionStorage['changeAddr']){
+        changeAddr = JSON.parse(sessionStorage['changeAddr'])
+      }
       return {list,location,locationList,shopprice,shopnum,shopcarlist,changeAddr,orderInfo}
     case 'orderInfo':
-      orderInfo = action.orderInfo
+      orderInfo = action.orderInfo ? action.orderInfo : null
+      if(sessionStorage['orderInfo']){
+        orderInfo = JSON.parse(sessionStorage['orderInfo'])
+      }
       return {list,location,locationList,shopprice,shopnum,shopcarlist,changeAddr,orderInfo}
     default:
       return state;
