@@ -12,7 +12,7 @@ class Index extends React.Component{
           <img src={require('../../../public/img/ele-blue.png')} className='blue' alt=""/>
           首页
         </Link>
-        <Link to='/Find' className={pathname('Find')}>
+        <Link to='/Discover' className={pathname('Discover')}>
           <img src={require('../../../public/img/find-gray.png')} className='gray' alt=""/>
           <img src={require('../../../public/img/find-blue.png')} className='blue' alt=""/>
           发现

@@ -31,7 +31,6 @@ class Checkout extends React.Component{
       endTime = endTime.split(':')[0] + ':' + ( M < 10 ? '0' + M : M)
     }
     this.setState({endTime:endTime,deliveryTime:endTime})
-    console.log(endTime)
 
     for (let i=0;i<10;i++){
       let M = accAdd(endTime.split(':')[1],15)
@@ -66,7 +65,7 @@ class Checkout extends React.Component{
     }else {
       let data = []
       data.push({changeAddr:changeAddr,orderInfo:orderInfo,finalPrice:finalPrice,deliveryTime:deliveryTime})
-      console.log(data)
+      console.log('订单信息：',data)
     }
   }
   render(){

@@ -38,7 +38,7 @@ class ShopRouter extends React.Component{
                     search:'id=' + (id ? id : null)
                   }} activeClassName='active'>评价</NavLink>
                   <NavLink to={{
-                    pathname:'/Home/FoodDetail/Shop',
+                    pathname:'/Home/FoodDetail/Shopintr',
                     search:'id=' + (id ? id : null)
                   }} activeClassName='active'>商家</NavLink>
                 </div>
