@@ -9,15 +9,9 @@ import {BundleFun} from './common/Bundle';
 class Index extends React.Component{
   render(){
     return(
-      <div>
+
         <HashRouter>
           <div>
-            <div>
-              {/*<NavLink to='/Home'  activeClassName='selected'>Home</NavLink>*/}
-              {/*<NavLink to='/Find'  activeClassName='selected'>Find</NavLink>*/}
-              {/*<NavLink to='/Order'  activeClassName='selected'>Order</NavLink>*/}
-              {/*<NavLink to='/Center'  activeClassName='selected'>Center</NavLink>*/}
-            </div>
             <Route exact path='/' render={()=>(<Redirect to='/Home'/>)}/>
             <Route path='/Home' component={() =>BundleFun(Home)}/>
             <Route path='/Discover' component={() =>BundleFun(Discover)}/>
@@ -25,7 +19,7 @@ class Index extends React.Component{
             <Route path='/Center' component={() =>BundleFun(Center)}/>
           </div>
         </HashRouter>
-      </div>
+
     )
   }
 }

@@ -104,36 +104,36 @@ html,body{
       &.mb{margin-bottom: 10px}
       height: 40px;
       a{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
         >img,.title,.subtitle{
-          float: left;
-          width: 20px;
+          width: 1.333rem;
           display: block;
-          margin: 10px;
+          margin: 0.5rem;
           color: #333;
         }
         .title,.subtitle{
-          width: calc(50% - 40px );
+          width: 50%;
           margin: 0;
-          line-height: 40px;
-          font-size: 16px;
+          font-size: 0.9rem;
         }
+
         .subtitle{
           font-size: 14px;
           color: #ccc;
           text-align: right;
-          .new{
-            color: #fff;
-            font-size: 12px;
-            font-weight: 300;
-            background-color: #ff0c0c;
-            padding: 2px 3px;
-            border-radius: 8px;
-            display: block;
-            margin: 10px 5px;
-            height: 14px;
-            float: left;
-            line-height: 14px;
-          }
+
+        }
+        .new{
+          color: #fff;
+          font-size: 0.6rem;
+          font-weight: 300;
+          background-color: #ff0c0c;
+          padding: 2px 3px;
+          border-radius: 8px;
+          line-height: 14px;
         }
       }
     }

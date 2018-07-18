@@ -59,6 +59,7 @@
       overflow-x: hidden;
       .flipsnap{
         width: 100%;
+        margin:  0 auto;
         .card-slide{
           width: 100%;
           display: none;
@@ -153,7 +154,7 @@
       .list-items{
         padding: 10px 0;
         display: grid;
-        grid-template-rows: 65px 1fr;
+        grid-template-rows: 1fr 1fr;
         grid-template-columns: 65px 1fr;
         .food-img{
           grid-row: 1/3;
@@ -163,8 +164,8 @@
           }
         }
         .activity-wrap{
-          padding: 10px;
           .source-tag{
+            padding: 10px 10px 0 10px;
             font-size: 12px;
             color: rgb(232, 71, 11);
             line-height: 14px;
@@ -176,75 +177,78 @@
               box-sizing: border-box;
             }
           }
+          .act-row{
+            padding: 0 10px;
+            display: flex;
+            height: 14px;
+            line-height: 14px;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+            .act-row-info{
+              i{
+                background-color: rgb(112, 188, 70);
+                font-style: normal;
+                font-size: 12px;
+                padding: 0 2px;
+                border-radius: 1px;
+                transform: scale(.9);
+                display: inline-block;
+                color: #fff;
+                line-height: 15px;
+                margin-right: 3px;
+              }
+            }
+            .act-row-num{
+              i{
+                border: 4px solid transparent;
+                border-top-color: #999;
+                display: inline-block;
+                margin-left: 2px;
+              }
+            }
+          }
+          .act-more{
+            padding: 0 10px 10px 10px;
+            height: auto;
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+            .act-more-info{
+              i{
+                background-color: rgb(240, 115, 115);
+                font-style: normal;
+                font-size: 12px;
+                padding: 0 2px;
+                border-radius: 1px;
+                transform: scale(.9);
+                display: inline-block;
+                color: #fff;
+                line-height: 15px;
+                margin-right: 3px;
+                position: relative;
+                top: -3px;
+              }
+              span{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 210px;
+                display: inline-block;
+              }
+            }
+            .act-row-num{
+              i{
+                border: 4px solid transparent;
+                border-top-color: #999;
+                display: inline-block;
+                margin-left: 2px;
+              }
+            }
+          }
         }
-        .act-row{
-          display: flex;
-          height: 14px;
-          line-height: 14px;
-          justify-content: space-between;
-          font-size: 12px;
-          color: #999;
-          margin-top: 4px;
-          .act-row-info{
-            i{
-              background-color: rgb(112, 188, 70);
-              font-style: normal;
-              font-size: 12px;
-              padding: 0 2px;
-              border-radius: 1px;
-              transform: scale(.9);
-              display: inline-block;
-              color: #fff;
-              line-height: 15px;
-              margin-right: 3px;
-            }
-          }
-          .act-row-num{
-            i{
-              border: 4px solid transparent;
-              border-top-color: #999;
-              display: inline-block;
-              margin-left: 2px;
-            }
-          }
-        }
-        .act-more{
-          height: auto;
-          font-size: 12px;
-          color: #999;
-          margin-top: 4px;
-          .act-more-info{
-            i{
-              background-color: rgb(240, 115, 115);
-              font-style: normal;
-              font-size: 12px;
-              padding: 0 2px;
-              border-radius: 1px;
-              transform: scale(.9);
-              display: inline-block;
-              color: #fff;
-              line-height: 15px;
-              margin-right: 3px;
-              position: relative;
-              top: -3px;
-            }
-            span{
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              max-width: 250px;
-              display: inline-block;
-            }
-          }
-          .act-row-num{
-            i{
-              border: 4px solid transparent;
-              border-top-color: #999;
-              display: inline-block;
-              margin-left: 2px;
-            }
-          }
-        }
+
         .shop-info{
           padding: 0 10px;
           .shop-title{
@@ -836,7 +840,7 @@
         color: #333;
         display: inline-block;
         text-decoration: none;
-        padding: 3px 42px;
+        padding: 3px 38px;
         font-size: 14px;
         font-weight: 400;
         &.active{

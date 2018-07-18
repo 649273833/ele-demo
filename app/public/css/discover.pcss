@@ -39,6 +39,7 @@
     }
 
     .item1{
+      position: relative;
       grid-row:1/3;
       border-right: 1px solid #eee;
       >div{
@@ -46,7 +47,10 @@
       }
       >img{
         align-self: flex-end;
-        width: 75px;
+        width: 50%;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
       }
       .title{
         color: rgb(232, 143, 40);
@@ -123,6 +127,12 @@
       img{
         width: 100%;
       }
+      .act-name{
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
       .act-info{
         margin-top: 6px;
         color: #ff5339;
@@ -148,5 +158,10 @@
     color: #999;
     background: #fff;
     padding: 15px;
+  }
+}
+#moreeee{
+  &.active{
+    color: #ff0c0c;
   }
 }

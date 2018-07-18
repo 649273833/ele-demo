@@ -3,7 +3,7 @@ const MIN_TOUCH_DISTENCE = 100//最小拖动值
 class Page extends React.Component {
   state = {
     active:true,
-    width:375,
+    width:document.body.offsetWidth,
     parentWidth:'',
     move:0
   }

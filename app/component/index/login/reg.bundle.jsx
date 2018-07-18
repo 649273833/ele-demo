@@ -21,7 +21,6 @@ class Index extends React.Component{
         this.setState({sendCode:false,codeText:'重新获取'});
         time = 30;
       }
-      console.log(time);
       this.setState({time})
     },1000)
   };

@@ -13,9 +13,8 @@ class Index extends React.Component{
   }
   render(){
     return(
-      <div className='home'>
         <HashRouter>
-          <div>
+          <div className='home'>
             <Route exact path='/Home' render={()=>(<Redirect to='/Home/HomeList'/>)}/>
             <Route path='/Home/HomeList' component={() =>BundleFun(HomeList)}/>
             <Route path='/Home/SearchLocation' component={() =>BundleFun(SearchLocation)}/>
@@ -24,7 +23,6 @@ class Index extends React.Component{
             <Route path='/Home/Checkout' component={() =>BundleFun(Checkout)}/>
           </div>
         </HashRouter>
-      </div>
     )
   }
 }

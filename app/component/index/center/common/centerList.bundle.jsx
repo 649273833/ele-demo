@@ -115,8 +115,9 @@ class Index extends React.Component{
            <a href='javascript:;'>
              <img src={require('../../../../public/img/ele-card.png')} alt=""/>
              <span className='title'>饿了么联名卡</span>
+             <span className='new'>NEW</span>
              <span className='subtitle'>
-               <span className='new'>NEW</span>
+
                免费领百元红包
              </span>
              <img src={require('../../../../public/img/Arrow-right-gray.png')} alt=""/>

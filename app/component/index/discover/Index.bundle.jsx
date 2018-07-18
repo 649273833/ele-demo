@@ -76,7 +76,7 @@ class Index extends React.Component{
             <span className='discount'>特价换购</span>
           </a>
         </section>
-        <p className="activity-more">查看更多</p>
+        <div className='testbg'/>
         <Footer/>
       </div>
     )
